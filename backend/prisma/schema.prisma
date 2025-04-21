@@ -23,7 +23,7 @@ model User {
   id             String    @id @default(uuid())
   email          String    @unique
   password       String
-  name           String
+  fullName       String
   shippingAddress String
   phoneNumber    String
   description    String?
