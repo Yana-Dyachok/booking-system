@@ -5,30 +5,31 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "./node_modules/@prisma/client"
-}
-
-datasource db {
-  provider = "postgresql"
-  url       = env("DATABASE_URL")
-}
-
-enum Role {
-  CLIENT
-  BUSINESS
-}
-
-model User {
-  id             String    @id @default(uuid())
-  email          String    @unique
-  password       String
-  fullName       String
-  shippingAddress String
-  phoneNumber    String
-  description    String?
-  role           Role      
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  hashedRt       String?
-}
+	provider = "prisma-client-js"
+	output   = "./prisma/generated/client"
+  }
+  
+  datasource db {
+	provider = "postgresql"
+	url       = env("DATABASE_URL")
+  }
+  
+  enum Role {
+	CLIENT
+	BUSINESS
+  }
+  
+  model User {
+	id             String    @id @default(uuid())
+	email          String    @unique
+	password       String
+	fullName       String
+	shippingAddress String
+	phoneNumber    String
+	description    String?
+	role           Role      
+	createdAt      DateTime  @default(now())
+	updatedAt      DateTime  @updatedAt
+	hashedRt       String?
+  }
+  

@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtPayload } from '../types/jwt-payload.type';
-import { Role } from '.prisma/client';
+import { Role } from '../../../../prisma/prisma/generated/client';
 
 export const Roles = (...roles: Role[]) => SetMetadata('roles', roles);
 

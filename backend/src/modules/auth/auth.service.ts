@@ -10,7 +10,7 @@ import { UserService } from '../user/user.service';
 import { RegisterUserDto } from '../user';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
-import { Role } from '.prisma/client';
+import { Role } from '../../../prisma/prisma/generated/client';
 
 @Injectable()
 export class AuthService {

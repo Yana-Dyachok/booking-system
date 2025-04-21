@@ -6,7 +6,7 @@ import {
 	IsOptional,
 } from 'class-validator';
 import { IUserDTO } from 'src/common/types';
-import { Role } from '.prisma/client';
+import { Role } from '../../../../prisma/prisma/generated/client';
 
 export class RegisterUserDto implements IUserDTO {
 	@IsEmail({}, { message: 'Please enter a valid email address' })

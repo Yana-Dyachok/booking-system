@@ -11,11 +11,11 @@ import {
 	UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User, Role } from '.prisma/client';
 import { Roles, RolesGuard } from '../auth/guards/roles.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { RequestWithLoadedEntity } from '@/common/types';
+import { User, Role } from '../../../prisma/prisma/generated/client';
 
 @Controller('user')
 export class UserController {
