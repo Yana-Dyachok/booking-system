@@ -1,2 +1,61 @@
-# booking-system
+# Booking System
 Develop a user management system with client and business roles. Clients can view businesses and book/manage appointments (date, time, duration).
+
+### How to install
+
+1.  Clone this repository
+```
+git clone https://github.com/Yana-Dyachok/booking-system.git
+```
+2.  Move to the cloned repository
+```
+cd booking-system
+```
+3.  Move to the directory
+```
+cd backend
+```
+4. Installing NPM modules
+```
+npm i
+```
+
+5.  Running application
+```
+npm run start
+```
+6. Open  http://localhost:3000 with your browser to see the result.
+
+
+## The technology stack used:
+   - TypeScript
+   - React, React Suspense
+   - Next.js
+   - Nest.js, Node.js
+   - PostgreSQL
+   - Eslint, Prettier, Husky
+   - SASS
+   
+
+
+## Scripts
+ Scripts                  |   instructions                         | Comands
+--------------------------|:---------------------------------------|:-----------------------------
+ESLint                    | check:                                 | npm run lint 
+Husky                     |setting up Git hooks:                   |npm run prepare
+Next                      | compiles files and builds the app:     | npm run build 
+//                        | create a local server for development: | npm run dev 
+Prettier                  | checks and formats files:              | npm run format
+
+
+### Task:
+ 1. You need to do Booking System.
+ 2. Technologies (you can choose): 
+Front-end: React, React Native, Next.js
+Back-end: Nest.js, Express.js, Next.js, Node.js, 
+Database: PostgreSQL, MongoDB, MySQL
+ 3. Requirements:
+- Ability to create, edit, delete, and view users.
+- 2 types of users: client and business
+- Clients should be able to view a list of business users and make appointments with them. Date, time and duration. 
+- Clients should also have the ability to see and manage their own appointments (cancel or reschedule them).
