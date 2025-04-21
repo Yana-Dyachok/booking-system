@@ -1,0 +1,44 @@
+@use '../../styles/colors.scss' as colors;
+
+.button {
+  width: 28rem;
+  height: 5.8rem;
+  display: inline-block;
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:disabled {
+    background-color: colors.$c-gray;
+    cursor: not-allowed;
+    border: none;
+  }
+
+  &:focus:not([disabled]) {
+    background-color: colors.$c-blue-400;
+    box-shadow: 2px 4px 4px 0 colors.$c-blue-800 inset;
+  }
+}
+
+.buttonLight {
+  background-color: colors.$c-yellow;
+  color: colors.$c-black;
+
+  &:hover:not([disabled]) {
+    border: 1px solid colors.$c-gray;
+    box-shadow: 2px 4px 4px 0 colors.$c-gray;
+  }
+}
+
+.buttonDark {
+  background-color: colors.$c-blue-400;
+  color: colors.$c-white;
+
+  &:hover:not([disabled]) {
+    border: 1px solid colors.$c-gray;
+    box-shadow: 2px 4px 4px 0 colors.$c-gray;
+  }
+}

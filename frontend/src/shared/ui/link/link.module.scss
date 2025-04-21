@@ -1,0 +1,31 @@
+@use '../../styles/colors.scss' as colors;
+.linkLight {
+  padding-bottom: 0.1rem;
+  position: relative;
+  font-size: 1.6rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0.1rem;
+    background-color: colors.$c-gray-300;
+    transition: all 0.4s ease-in;
+    transform: translateX(-50%);
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+.linkDark:hover {
+  color: colors.$c-white-100;
+  font-size: 1.6rem;
+}
+
+.linkDark:hover {
+  color: colors.$c-gray-300;
+}

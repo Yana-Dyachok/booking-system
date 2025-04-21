@@ -1,0 +1,14 @@
+@use '../../styles/colors.scss' as colors;
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0.5rem 6.2rem;
+  border-top: 1px solid colors.$c-gray-150;
+}
+
+.wrapper {
+  max-width: 122.5rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  justify-content: center;
+  padding: 2.35rem 0 2.4rem;
+}
+
+.wrapper {
+  max-width: 122.3rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr 0.5fr;
+  align-items: center;
+}
+
+.navList {
+  display: flex;
+  gap: 3rem;
+}
+
+.buttons {
+  display: flex;
+  align-items: baseline;
+  gap: 3rem;
+}

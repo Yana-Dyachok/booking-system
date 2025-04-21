@@ -1,0 +1,68 @@
+@use './colors.scss' as colors;
+@mixin r($width) {
+  @media (max-width: #{$width}px) {
+    @content;
+  }
+}
+
+@mixin rmin($width) {
+  @media (min-width: #{$width}px) {
+    @content;
+  }
+}
+
+@mixin line-clamp($lines: 1) {
+  @if $lines <=1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+  }
+}
+
+@mixin hover() {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:not(:focus) {
+      @content;
+    }
+  }
+}
+
+@mixin hoverFocus() {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin icon($w, $h) {
+  &::before {
+    content: '';
+    display: block;
+    min-width: $w;
+    height: $h;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    mask-position: center;
+    background-color: colors.$c-brown-600;
+  }
+
+  @include hoverFocus {
+    cursor: pointer;
+    &::before {
+      background-color: colors.$c-orange;
+    }
+  }
+
+  &:active {
+    &::before {
+      border-bottom: 0.1rem solid colors.$c-orange;
+    }
+  }
+}

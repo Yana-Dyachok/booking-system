@@ -1,0 +1,35 @@
+@use '../../styles/colors.scss' as colors;
+
+.container {
+  position: relative;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.inputText {
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 14px;
+  border-width: 1px;
+  border-radius: 24px;
+}
+
+.label {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.focused {
+  border-width: 1px;
+}
+
+.wrong {
+  border-width: 1px;
+}
+
+.correct {
+  border-width: 1px;
+}

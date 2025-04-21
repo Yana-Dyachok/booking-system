@@ -1,0 +1,36 @@
+@use './colors.scss' as colors;
+@use './fonts.scss' as fonts;
+@use './reset.scss';
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  font-size: 10px;
+}
+
+body {
+  font-family: 'Roboto, sans serif';
+  -webkit-font-smoothing: auto;
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: colors.$c-black;
+  background-color: colors.$c-white;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4rem;
+  padding: 0.5rem;
+}
+
+@media (max-width: 580px) {
+  body {
+    font-size: 1.5rem;
+  }
+}
