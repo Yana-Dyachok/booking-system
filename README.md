@@ -13,7 +13,7 @@ cd booking-system
 ```
 3.  Move to the directory
 ```
-cd backend
+cd frontend
 ```
 4. Installing NPM modules
 ```
@@ -22,10 +22,24 @@ npm i
 
 5.  Running application
 ```
-npm run start
+npm run dev 
 ```
 6. Open  http://localhost:3000 with your browser to see the result.
 
+### N.B! Keep the server running during functionality review.
+1.  Open new terminal
+2.  Move to the directory
+```
+cd backend
+```
+3. Installing NPM modules
+```
+npm i
+```
+4.  Running application
+```
+npm run start
+```
 
 ## The technology stack used:
    - TypeScript
