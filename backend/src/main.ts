@@ -6,9 +6,10 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 	const configService = app.get(ConfigService);
+	const rawOrigin = configService.get<string>('config.frontendUrl');
 	const port = configService.get<number>('config.port') ?? 4000;
 	app.enableCors({
-		origin: '*',
+		origin: rawOrigin,
 		allowedHeaders: ['Content-Type', 'Authorization'],
 		methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
 		credentials: true,

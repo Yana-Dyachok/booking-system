@@ -22,6 +22,7 @@ export interface IConfig {
 	nodeEnv: string;
 	jwtSecretKey: string;
 	jwtRefreshSecretKey: string;
+	frontendUrl?: string;
 }
 
 export interface IBaseEntity {

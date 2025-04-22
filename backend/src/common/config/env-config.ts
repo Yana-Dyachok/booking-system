@@ -9,6 +9,7 @@ export const envConfig = registerAs(
 		token_expiration:
 			parseInt(process.env.EXPIRATION_AGE as string, 10) ?? 3600,
 		nodeEnv: process.env.NODE_ENV ?? 'development',
+		frontendUrl: process.env.FRONTEND_URL,
 		jwtSecretKey: process.env.JWT_SECRET_KEY ?? 'default-jwt-secret',
 		jwtRefreshSecretKey:
 			process.env.JWT_REFRESH_SECRET_KEY ?? 'default-jwt-refresh',
