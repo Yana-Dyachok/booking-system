@@ -1,10 +1,11 @@
 import Link from 'next/link';
-import { Button } from '@/shared/ui/button/button.';
+import { Button } from '@/shared/ui/button/button.component';
+import { Wrapper } from '@/shared/ui/wrapper';
 import style from './not-found.module.scss';
 
 const NotFoundContent = () => {
   return (
-    <div className={style.block}>
+    <Wrapper>
       <div className={style.wrapper}>
         <h1>Oopps! Page not found</h1>
         <Link href="/" passHref>
@@ -13,7 +14,7 @@ const NotFoundContent = () => {
           </Button>
         </Link>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

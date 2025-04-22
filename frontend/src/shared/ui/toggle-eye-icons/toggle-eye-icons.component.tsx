@@ -9,7 +9,11 @@ export const ToggleEyeIcons: React.FC<IToggleEyeIconsProps> = ({
   onToggle,
 }) => {
   return (
-    <button onClick={() => onToggle(!isShow)} className={styles.container}>
+    <button
+      type="button"
+      onClick={() => onToggle(!isShow)}
+      className={styles.container}
+    >
       {isShow ? <OpenEyeSvg /> : <CloseEyeSvg />}
     </button>
   );

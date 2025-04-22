@@ -3,13 +3,13 @@ import React from 'react';
 import { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { toast } from 'react-toastify';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import { ILoginResponse, ILoginData } from '@/shared/types/auth.types';
-import { Button } from '@/shared/ui/button/button.';
+import { Button } from '@/shared/ui/button/button.component';
 import { schemaLogin } from '@/utils/validation.schema';
 import { Input } from '@/shared/ui/input';
 import { useAuthStore } from '../../store/use-auth.store';
-import { toast } from 'react-toastify';
 import { loginUserApi } from '@/api/auth.api';
 import { Loader } from '@/shared/ui/loader/loader.component';
 import { Title } from '@/shared/ui/title/title.component';
@@ -26,6 +26,7 @@ export const LoginForm: React.FC = () => {
       password: '',
     },
   });
+
   const { setAuthToken, setRefreshToken } = useAuthStore();
 
   const {
@@ -60,8 +61,8 @@ export const LoginForm: React.FC = () => {
 
   return (
     <Wrapper>
-      <form className={styles.loginForm}>
-        <Title title="Log in"></Title>
+      <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
+        <Title title="Log in" />
         <Input control={control} name="email" label="Email" defaultValue="" />
         <Input
           control={control}
@@ -75,12 +76,7 @@ export const LoginForm: React.FC = () => {
           link="/register"
           linkText="Sign up"
         />
-        <Button
-          btnType="submit"
-          onClick={handleSubmit(onSubmit)}
-          color="light"
-          disabled={isLoading}
-        >
+        <Button btnType="submit" color="light" disabled={isLoading}>
           {isLoading ? <Loader /> : 'Log in'}
         </Button>
       </form>

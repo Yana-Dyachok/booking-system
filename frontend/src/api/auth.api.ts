@@ -5,13 +5,12 @@ import { IRegisterData, IRegisterResponse } from '@/shared/types/user.types';
 import { PATH_KEYS, HttpStatusCode } from '@/shared/types/types';
 import { useAuthStore } from '../shared/store/use-auth.store';
 
-export const registerUser = async (
+export const registerUserApi = async (
   userData: IRegisterData,
 ): Promise<IRegisterResponse> => {
   try {
     return await api.post(PATH_KEYS.REGISTER, userData);
   } catch (error) {
-    console.error('Error registering user:', error);
     if (error instanceof AxiosError) {
       if (error.response?.status === HttpStatusCode.BAD_REQUEST) {
         throw new Error(
@@ -62,7 +61,7 @@ export const refreshAccessToken = async (
   }
 };
 
-export const logoutUser = async (): Promise<void | { error: string }> => {
+export const logoutUserApi = async (): Promise<void | { error: string }> => {
   const { logout } = useAuthStore.getState();
   logout();
   try {

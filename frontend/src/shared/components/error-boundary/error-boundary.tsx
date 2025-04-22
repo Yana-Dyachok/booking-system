@@ -1,7 +1,8 @@
 'use client';
 
 import { Component, ErrorInfo, ReactNode } from 'react';
-import { Button } from '@/shared/ui/button/button.';
+import { Button } from '@/shared/ui/button/button.component';
+import { Wrapper } from '@/shared/ui/wrapper';
 
 interface ErrorBoundaryProps {
   fallback?: ReactNode;
@@ -33,12 +34,14 @@ export class ErrorBoundary extends Component<
   render(): ReactNode {
     if (this.state.hasError) {
       return (
-        <div className="container">
-          <h2>Ooops... You are getting an error</h2>
-          <Button btnType="button" to="/" color="dark">
-            Back
-          </Button>
-        </div>
+        <Wrapper>
+          <div className="container">
+            <h2>Ooops... You are getting an error</h2>
+            <Button btnType="button" to="/" color="dark">
+              Back
+            </Button>
+          </div>
+        </Wrapper>
       );
     }
 

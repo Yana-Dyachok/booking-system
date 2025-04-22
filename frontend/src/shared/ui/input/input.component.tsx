@@ -53,7 +53,7 @@ export function Input<
           onFocus={handleFocus}
           className={`${styles.inputText} ${
             value && !error ? styles.correct : ''
-          } ${isFocused ? styles.focuced : ''} ${error ? styles.wrong : ''}`}
+          } ${isFocused ? styles.focused : ''} ${error ? styles.wrong : ''}`}
           autoCapitalize="none"
           ref={inputRef}
         />

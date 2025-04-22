@@ -1,3 +1,4 @@
+import { Role } from './types';
 export interface IRegisterData {
   email: string;
   password: string;
@@ -7,10 +8,6 @@ export interface IRegisterData {
   phoneNumber: string;
   role: Role;
   description?: string;
-}
-const enum Role {
-  CLIENT,
-  BUSINESS,
 }
 
 export interface IRegisterResponse

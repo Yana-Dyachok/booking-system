@@ -1,11 +1,17 @@
 @use '../../styles/colors.scss' as colors;
 
 .error {
-  padding-top: 1rem;
+  padding: 1rem 0 0 0.5rem;
   color: colors.$c-red;
-  min-height: 1.5rem;
+  min-height: 2.5rem;
 }
 
 .nonError {
   min-height: 2.5rem;
+}
+
+@media (max-width: 580px) {
+  .nonError {
+    min-height: 3.5rem;
+  }
 }

@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { Role } from '@/shared/types';
 
 const emailValidationSchema = (): yup.StringSchema<string> =>
   yup
@@ -74,6 +75,9 @@ export const createAddressValidationSchema = () =>
     .min(5, 'Address must be at least 5 characters long')
     .max(100, 'Address cannot be longer than 100 characters');
 
+export const createCheckValidationSchema = () =>
+  yup.mixed<Role>().oneOf(Object.values(Role)).required('Role is required');
+
 export const schemaLogin: yup.ObjectSchema<{
   email: string;
   password: string;
@@ -89,12 +93,14 @@ export const schemaRegister: yup.ObjectSchema<{
   fullName: string;
   shippingAddress: string;
   phoneNumber: string;
+  role: Role;
 }> = yup.object().shape({
   email: emailValidationSchema(),
   password: passwordValidationSchema(),
   fullName: createNameValidationSchema(),
   shippingAddress: createAddressValidationSchema(),
   phoneNumber: createPhoneNumberValidationSchema(),
+  role: createCheckValidationSchema(),
   confirmPassword: yup
     .string()
     .required('Password confirmation is required')
