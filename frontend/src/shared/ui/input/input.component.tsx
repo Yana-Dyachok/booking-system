@@ -14,8 +14,6 @@ export function Input<
   rules,
   defaultValue,
   label,
-  extraInputContainerStyles,
-  extraErrorStyles = {},
   toggleShowPassword = false,
 }: InputProps<T, N>) {
   const [isFocused, setIsFocused] = useState(false);
@@ -44,7 +42,7 @@ export function Input<
   return (
     <div className={styles.container}>
       {label && <label className={styles.label}>{label}</label>}
-      <div className={styles.inputText}>
+      <div className={styles.inputBlock}>
         <input
           type={
             toggleShowPassword ? (showPassword ? 'text' : 'password') : 'text'
@@ -66,7 +64,6 @@ export function Input<
           />
         )}
       </div>
-
       <InputError<T> control={control} field={name} />
     </div>
   );

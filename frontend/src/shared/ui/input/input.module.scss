@@ -2,34 +2,36 @@
 
 .container {
   position: relative;
-  padding-bottom: 20px;
-  margin-bottom: 10px;
+  padding-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+.inputBlock {
+  position: relative;
 }
 
 .inputText {
   width: 100%;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 14px;
-  border-width: 1px;
-  border-radius: 24px;
+  padding: 0.5rem 1rem;
+  font-size: 2rem;
+  border-width: 0.1rem;
+  border-radius: 1rem;
+  background-color: colors.$c-blue-800;
 }
 
 .label {
-  margin-bottom: 6px;
-  font-size: 14px;
+  padding-bottom: 1rem;
+  font-size: 2rem;
 }
 
 .focused {
-  border-width: 1px;
+  border: solid 0.1rem colors.$c-yellow;
 }
 
 .wrong {
-  border-width: 1px;
+  border: solid 0.1rem colors.$c-red;
 }
 
 .correct {
-  border-width: 1px;
+  border-width: 0.1rem;
 }

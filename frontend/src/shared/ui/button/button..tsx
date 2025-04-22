@@ -1,11 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+import { ReactNode } from 'react';
 import style from './button.module.scss';
 
 type ButtonProps = {
   btnType: 'button' | 'submit';
-  children: string;
+  children: string | ReactNode;
   to?: string;
   disabled?: boolean;
   color: 'dark' | 'light';

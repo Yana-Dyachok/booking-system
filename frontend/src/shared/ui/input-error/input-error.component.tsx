@@ -14,5 +14,7 @@ export function InputError<T extends FieldValues>({
 
   return errors[field]?.message ? (
     <p className={styles.error}>{String(errors[field]?.message)}</p>
-  ) : null;
+  ) : (
+    <p className={styles.nonError}></p>
+  );
 }

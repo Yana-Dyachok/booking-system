@@ -1,5 +1,11 @@
 @use '../../styles/colors.scss' as colors;
 
 .error {
+  padding-top: 1rem;
   color: colors.$c-red;
+  min-height: 1.5rem;
+}
+
+.nonError {
+  min-height: 2.5rem;
 }

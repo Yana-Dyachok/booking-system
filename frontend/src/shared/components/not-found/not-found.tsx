@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Button } from '@/shared/ui/button/button';
+import { Button } from '@/shared/ui/button/button.';
 import style from './not-found.module.scss';
 
 const NotFoundContent = () => {
