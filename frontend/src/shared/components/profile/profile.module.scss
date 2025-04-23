@@ -1,0 +1,27 @@
+@use '../../styles/colors.scss' as colors;
+
+.profileBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 3rem;
+}
+
+.edit:hover {
+  color: colors.$c-blue-400;
+}
+
+.header {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.titles {
+  color: colors.$c-gray;
+  margin-right: 1rem;
+}
+
+.item {
+  padding-bottom: 1rem;
+}

@@ -1,0 +1,32 @@
+@use '../../styles/colors.scss' as colors;
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: colors.$c-blue-800;
+  padding: 4rem;
+  margin: 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.2);
+  text-align: center;
+
+  .text {
+    margin-bottom: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}

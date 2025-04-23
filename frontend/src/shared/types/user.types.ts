@@ -25,3 +25,26 @@ export interface IChangePassword {
 export interface IVallidPassword extends IChangePassword {
   confirmPassword: string;
 }
+
+export interface IUser {
+  email: string;
+  password: string;
+  fullName: string;
+  shippingAddress: string;
+  phoneNumber: string;
+}
+
+export interface ICreateUser {
+  email: string;
+  password: string;
+  fullName: string;
+  shippingAddress: string;
+  phoneNumber: string;
+}
+
+export interface IPersonalInfoData extends Omit<IUser, 'password'> {
+  email: string;
+  fullName: string;
+  shippingAddress: string;
+  phoneNumber: string;
+}

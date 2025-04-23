@@ -1,5 +1,5 @@
-import React from 'react';
-import { SVGProps } from 'react';
+import React, { SVGProps } from 'react';
+
 export const CloseEyeSvg = (props: SVGProps<SVGSVGElement>) => (
   <svg width={30} height={25} fill="none" {...props}>
     <path

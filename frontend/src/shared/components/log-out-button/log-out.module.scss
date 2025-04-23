@@ -1,0 +1,10 @@
+@use '../../styles/colors.scss' as colors;
+
+.logOut {
+  cursor: pointer;
+  color: colors.$c-white;
+
+  &:hover {
+    color: colors.$c-blue-400;
+  }
+}

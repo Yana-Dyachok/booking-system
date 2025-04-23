@@ -5,6 +5,7 @@ import {
   IRegisterData,
   IRegisterResponse,
   IChangePassword,
+  ICreateUser,
 } from '@/shared/types/user.types';
 import { useAuthStore } from '../shared/store/use-auth.store';
 import { getUserId } from '@/utils/get-user-id.utils';
@@ -26,7 +27,7 @@ export const createUser = async (
   }
 };
 
-export const getUserById = async (): Promise<IRegisterResponse> => {
+export const getUserByIdApi = async (): Promise<IRegisterResponse> => {
   const token = useAuthStore.getState().authToken;
   const id = getUserId(token);
   try {
@@ -44,7 +45,7 @@ export const getUserById = async (): Promise<IRegisterResponse> => {
   }
 };
 
-export const getUsersByRole = async (): Promise<IRegisterResponse[]> => {
+export const getUsersByRoleApi = async (): Promise<IRegisterResponse[]> => {
   const role = useAuthStore.getState().role;
   try {
     const response = await api.get(`${PATH_KEYS.USER}/${role}`);
@@ -55,13 +56,13 @@ export const getUsersByRole = async (): Promise<IRegisterResponse[]> => {
   }
 };
 
-export const updateUser = async (
-  updateData: IRegisterData,
+export const updateUserApi = async (
+  updateData: Partial<ICreateUser>,
 ): Promise<IRegisterResponse> => {
   const token = useAuthStore.getState().authToken;
   const id = getUserId(token);
   try {
-    const response = await api.patch(`${PATH_KEYS.USER}/${id}`, updateData);
+    const response = await api.put(`${PATH_KEYS.USER}/${id}`, updateData);
     return response.data;
   } catch (error) {
     console.error(`Error updating user with ID ${id}:`, error);
@@ -75,11 +76,13 @@ export const updateUser = async (
   }
 };
 
-export const deleteUser = async (): Promise<IRegisterResponse> => {
+export const deleteUserApi = async (): Promise<IRegisterResponse> => {
   const token = useAuthStore.getState().authToken;
   const id = getUserId(token);
   try {
     const response = await api.delete(`${PATH_KEYS.USER}/${id}`);
+    const { logout } = useAuthStore.getState();
+    logout();
     return response.data;
   } catch (error) {
     console.error(`Error deleting user with ID ${id}:`, error);
@@ -93,7 +96,7 @@ export const deleteUser = async (): Promise<IRegisterResponse> => {
   }
 };
 
-export const changePassword = async (passwordData: IChangePassword) => {
+export const changePasswordApi = async (passwordData: IChangePassword) => {
   const token = useAuthStore.getState().authToken;
   const id = getUserId(token);
   try {

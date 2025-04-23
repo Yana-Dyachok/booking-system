@@ -1,23 +1,29 @@
+@use '../../styles/colors.scss' as colors;
+
 .header {
   display: flex;
   justify-content: center;
-  padding: 2.35rem 0 2.4rem;
+  padding: 2rem;
+  background-color: colors.$c-blue-800;
 }
 
 .wrapper {
-  max-width: 122.3rem;
+  max-width: 122rem;
   display: grid;
-  grid-template-columns: 1fr 2fr 0.5fr;
+  grid-template-columns: 5fr 1fr;
   align-items: center;
 }
 
 .navList {
   display: flex;
+  align-items: center;
   gap: 3rem;
 }
 
-.buttons {
-  display: flex;
-  align-items: baseline;
-  gap: 3rem;
+.link:hover {
+  color: colors.$c-blue-400;
+}
+
+.active {
+  color: colors.$c-yellow;
 }
