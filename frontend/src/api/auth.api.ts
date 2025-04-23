@@ -9,7 +9,10 @@ export const registerUserApi = async (
   userData: IRegisterData,
 ): Promise<IRegisterResponse> => {
   try {
-    return await api.post(PATH_KEYS.REGISTER, userData);
+    const { setRole } = useAuthStore.getState();
+    const { data } = await api.post(PATH_KEYS.REGISTER, userData);
+    setRole(data.role);
+    return data;
   } catch (error) {
     if (error instanceof AxiosError) {
       if (error.response?.status === HttpStatusCode.BAD_REQUEST) {

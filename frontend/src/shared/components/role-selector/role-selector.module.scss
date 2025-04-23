@@ -1,0 +1,32 @@
+@use '../../styles/mixins.scss' as mixin;
+
+.container {
+  padding-bottom: 1rem;
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.label {
+  padding-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.radioBlock {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.inputRadio {
+  @include mixin.inputBox(50%);
+}
+
+@media (max-width: 600px) {
+  .radioBlock {
+    font-size: 1.7rem;
+  }
+}

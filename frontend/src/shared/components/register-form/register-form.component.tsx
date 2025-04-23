@@ -1,8 +1,9 @@
 'use client';
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import { IRegisterData, IRegisterResponse, Role } from '@/shared/types';
@@ -14,6 +15,7 @@ import { Title } from '@/shared/ui/title';
 import { AskQuestion } from '@/shared/ui/ask-question/ask-question.component';
 import { Loader } from '@/shared/ui/loader';
 import { Wrapper } from '@/shared/ui/wrapper';
+import { RoleSelector } from '../role-selector/role-selector.component';
 import styles from '../login/login-form.module.scss';
 
 export const RegisterForm: React.FC = () => {
@@ -34,7 +36,7 @@ export const RegisterForm: React.FC = () => {
       role: Role.CLIENT,
     },
   });
-
+  const router = useRouter();
   const { mutate: registerUser, isPending } = useMutation<
     IRegisterResponse,
     AxiosError,
@@ -45,6 +47,7 @@ export const RegisterForm: React.FC = () => {
     },
     onSuccess: () => {
       toast.success('User created.');
+      router.push('./login');
     },
     onError: (error: AxiosError): void => {
       const axiosError = error as AxiosError<{ message: string }>;
@@ -60,7 +63,7 @@ export const RegisterForm: React.FC = () => {
     <Wrapper>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.loginForm}>
         <Title title="Sign up" />
-
+        <RoleSelector<IRegisterData> control={control} />
         <Input control={control} name="email" label="Email" defaultValue="" />
         <Input
           control={control}
@@ -94,36 +97,6 @@ export const RegisterForm: React.FC = () => {
           defaultValue=""
           toggleShowPassword={true}
         />
-        <div>
-          <label>Select role:</label>
-          <Controller
-            control={control}
-            name="role"
-            render={({ field }) => (
-              <>
-                <label>
-                  <input
-                    type="radio"
-                    value={Role.CLIENT}
-                    checked={field.value === Role.CLIENT}
-                    onChange={field.onChange}
-                  />
-                  Client
-                </label>
-                <label style={{ marginLeft: '1rem' }}>
-                  <input
-                    type="radio"
-                    value={Role.BUSINESS}
-                    checked={field.value === Role.BUSINESS}
-                    onChange={field.onChange}
-                  />
-                  Business
-                </label>
-              </>
-            )}
-          />
-        </div>
-
         <AskQuestion
           text="Have you already registered?"
           link="/login"

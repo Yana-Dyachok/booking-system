@@ -3,11 +3,12 @@
 .error {
   padding: 1rem 0 0 0.5rem;
   color: colors.$c-red;
-  min-height: 2.5rem;
+  min-height: 3rem;
 }
 
 .nonError {
-  min-height: 2.5rem;
+  padding: 1rem 0 0 0.5rem;
+  min-height: 3rem;
 }
 
 @media (max-width: 580px) {

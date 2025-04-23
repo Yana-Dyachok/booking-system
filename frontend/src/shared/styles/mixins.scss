@@ -41,28 +41,24 @@
   }
 }
 
-@mixin icon($w, $h) {
-  &::before {
+@mixin inputBox($r) {
+  width: 2rem;
+  height: 2rem;
+  border-radius: $r;
+  border: 0.1rem solid colors.$c-yellow;
+  appearance: none;
+  position: relative;
+  cursor: pointer;
+
+  &:checked::after {
     content: '';
-    display: block;
-    min-width: $w;
-    height: $h;
-    mask-repeat: no-repeat;
-    mask-size: contain;
-    mask-position: center;
-    background-color: colors.$c-brown-600;
-  }
-
-  @include hoverFocus {
-    cursor: pointer;
-    &::before {
-      background-color: colors.$c-orange;
-    }
-  }
-
-  &:active {
-    &::before {
-      border-bottom: 0.1rem solid colors.$c-orange;
-    }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: solid colors.$c-green;
+    border-width: 0 0.2rem 0.2rem 0;
+    transform: translate(-50%, -50%) rotate(45deg);
   }
 }

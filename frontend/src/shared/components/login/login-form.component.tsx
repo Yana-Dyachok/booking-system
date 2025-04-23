@@ -4,6 +4,7 @@ import { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import { ILoginResponse, ILoginData } from '@/shared/types/auth.types';
 import { Button } from '@/shared/ui/button/button.component';
@@ -26,7 +27,7 @@ export const LoginForm: React.FC = () => {
       password: '',
     },
   });
-
+  const router = useRouter();
   const { setAuthToken, setRefreshToken } = useAuthStore();
 
   const {
@@ -43,6 +44,7 @@ export const LoginForm: React.FC = () => {
     onSuccess: (data): void => {
       setAuthToken(data.accessToken);
       setRefreshToken(data.refreshToken);
+      router.push('./');
     },
     onError: (error: AxiosError<{ message?: string }>): void => {
       if (error?.response?.data?.message === 'Please verify your email first') {

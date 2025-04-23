@@ -31,7 +31,7 @@ const eslintConfig = [
     rules: {
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
-        'warn',
+        'off',
         { allowConstantExport: true },
       ],
       'prettier/prettier': [
