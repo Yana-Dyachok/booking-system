@@ -20,15 +20,29 @@ enum Role {
 }
 
 model User {
-  id              String   @id @default(uuid())
-  email           String   @unique
-  password        String
-  fullName        String
-  shippingAddress String
-  phoneNumber     String
-  description     String?
-  role            Role
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  hashedRt        String?
+  id                   String        @id @default(uuid())
+  email                String        @unique
+  password             String
+  fullName             String
+  shippingAddress      String
+  phoneNumber          String
+  description          String?
+  role                 Role
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  hashedRt             String?
+  clientAppointments   Appointment[] @relation("ClientAppointments")
+  businessAppointments Appointment[] @relation("BusinessAppointments")
+}
+
+model Appointment {
+  id          String    @id @default(uuid())
+  date        DateTime
+  endDate     DateTime?
+  durationMin Int
+  clientId    String
+  businessId  String
+  client      User      @relation("ClientAppointments", fields: [clientId], references: [id])
+  business    User      @relation("BusinessAppointments", fields: [businessId], references: [id])
+  createdAt   DateTime  @default(now())
 }

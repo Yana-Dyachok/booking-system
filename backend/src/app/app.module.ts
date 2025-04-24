@@ -7,12 +7,14 @@ import { envConfig } from '../common/config';
 import { resolve } from 'path';
 import { UserModule } from '@/modules/user';
 import { AuthModule } from '@/modules/auth';
+import { AppointmentModule } from '@/modules/appointment';
 
 @Module({
 	imports: [
 		PrismaModule,
 		AuthModule,
 		UserModule,
+		AppointmentModule,
 		ConfigModule.forRoot({
 			load: [envConfig],
 			envFilePath: resolve(process.cwd(), '.env'),

@@ -131,6 +131,16 @@ exports.Prisma.UserScalarFieldEnum = {
   hashedRt: 'hashedRt'
 };
 
+exports.Prisma.AppointmentScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  endDate: 'endDate',
+  durationMin: 'durationMin',
+  clientId: 'clientId',
+  businessId: 'businessId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -151,7 +161,8 @@ exports.Role = exports.$Enums.Role = {
 };
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Appointment: 'Appointment'
 };
 
 /**

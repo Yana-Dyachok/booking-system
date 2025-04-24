@@ -28,3 +28,11 @@ export interface IConfig {
 export interface IBaseEntity {
 	id: string;
 }
+
+export interface IBusinessUserPreview {
+	id: string;
+	email: string;
+	fullName: string;
+	phoneNumber: string;
+	description: string | null;
+}

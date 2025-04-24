@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import {
+	MiddlewareConsumer,
+	Module,
+	NestModule,
+	RequestMethod,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { PrismaModule } from '../prisma-orm';
 import { UserController } from './user.controller';
@@ -20,6 +25,6 @@ export class UserModule implements NestModule {
 					this.userService.findById(id),
 				),
 			)
-			.forRoutes('user/:id');
+			.forRoutes({ path: 'user/:id', method: RequestMethod.ALL });
 	}
 }

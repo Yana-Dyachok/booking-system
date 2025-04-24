@@ -47,7 +47,7 @@ export class AuthService {
 			shippingAddress: dto.shippingAddress,
 			password: hashedPassword,
 			description: dto.description,
-			role: Role.CLIENT,
+			role: dto.role,
 		});
 	}
 

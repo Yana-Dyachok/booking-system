@@ -31,5 +31,18 @@ generator client {
 	createdAt      DateTime  @default(now())
 	updatedAt      DateTime  @updatedAt
 	hashedRt       String?
+	clientAppointments   Appointment[] @relation("ClientAppointments")
+    businessAppointments Appointment[] @relation("BusinessAppointments")
   }
   
+  model Appointment {
+  id          String   @id @default(uuid())
+  date        DateTime
+  endDate     DateTime?
+  durationMin Int
+  clientId    String
+  businessId  String
+  client      User     @relation("ClientAppointments", fields: [clientId], references: [id])
+  business    User     @relation("BusinessAppointments", fields: [businessId], references: [id])
+  createdAt   DateTime @default(now())
+}

@@ -8,6 +8,7 @@ import { PrismaService } from '../prisma-orm';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { User, Role } from '../../../prisma/prisma/generated/client';
+import { IBusinessUserPreview } from '@/common/types';
 
 @Injectable()
 export class UserService {
@@ -38,8 +39,17 @@ export class UserService {
 		});
 	}
 
-	async findByRole(role: Role): Promise<User[]> {
-		return this.prisma.user.findMany({ where: { role } });
+	async findAllBusinessUsers(): Promise<IBusinessUserPreview[]> {
+		return this.prisma.user.findMany({
+			where: { role: 'BUSINESS' },
+			select: {
+				id: true,
+				fullName: true,
+				description: true,
+				email: true,
+				phoneNumber: true,
+			},
+		});
 	}
 
 	async updateUser(id: string, data: UpdateUserDto): Promise<User> {

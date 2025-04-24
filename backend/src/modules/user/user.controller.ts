@@ -7,15 +7,16 @@ import {
 	Body,
 	NotFoundException,
 	Req,
-	BadRequestException,
 	UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Roles, RolesGuard } from '../auth/guards/roles.guard';
+import { RolesGuard, Roles } from '../auth/guards/roles.guard';
+import { AuthGuard } from '@nestjs/passport';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { RequestWithLoadedEntity } from '@/common/types';
 import { User, Role } from '../../../prisma/prisma/generated/client';
+import { IBusinessUserPreview } from '@/common/types';
 
 @Controller('user')
 export class UserController {
@@ -26,22 +27,16 @@ export class UserController {
 		return this.userService.findAll();
 	}
 
+	@Get('business')
+	@Roles(Role.CLIENT)
+	@UseGuards(AuthGuard('jwt'), RolesGuard)
+	async getAllBusinessUsers(): Promise<IBusinessUserPreview[]> {
+		return this.userService.findAllBusinessUsers();
+	}
+
 	@Get(':id')
 	async findById(@Param('id') id: string): Promise<User | null> {
 		return this.userService.findById(id);
-	}
-
-	@Get('role/:role')
-	@Roles(Role.CLIENT)
-	@UseGuards(RolesGuard())
-	async findByRole(@Param('role') role: string): Promise<User[]> {
-		const upperRole = role.trim().toUpperCase() as keyof typeof Role;
-
-		if (!(upperRole in Role)) {
-			throw new BadRequestException(`Role '${role}' is invalid`);
-		}
-
-		return this.userService.findByRole(Role[upperRole]);
 	}
 
 	@Put(':id')
