@@ -13,14 +13,7 @@ export const registerUserApi = async (
     const { data } = await api.post(PATH_KEYS.REGISTER, userData);
     setRole(data.role);
     return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      if (error.response?.status === HttpStatusCode.BAD_REQUEST) {
-        throw new Error(
-          error.response.data.message || 'Invalid registration data provided',
-        );
-      }
-    }
+  } catch (error: unknown) {
     throw error;
   }
 };

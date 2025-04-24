@@ -1,21 +1,22 @@
-import Link from 'next/link';
 import { Button } from '@/shared/ui/button/button.component';
-import { Wrapper } from '@/shared/ui/wrapper';
-import style from './not-found.module.scss';
+import styles from './not-found.module.scss';
 
-const NotFoundContent = () => {
+export const NotFoundContent = () => {
   return (
-    <Wrapper>
-      <div className={style.wrapper}>
-        <h1>Oopps! Page not found</h1>
-        <Link href="/" passHref>
-          <Button btnType="button" color="dark">
-            Back to main
-          </Button>
-        </Link>
-      </div>
-    </Wrapper>
+    <div className={styles.errorBlock}>
+      <h1 className={styles.title}> Ooops... Page not found</h1>
+      <section className={styles.errorContainer}>
+        <span className={styles.spanError}>
+          <span className={styles.digitFirst}>4</span>
+        </span>
+        <span className={`${styles.spanError} ${styles.digitSecond}`}>0</span>
+        <span className={styles.spanError}>
+          <span className={styles.digitThird}>4</span>
+        </span>
+      </section>
+      <Button btnType="button" to="/" color="dark">
+        Back to main
+      </Button>
+    </div>
   );
 };
-
-export default NotFoundContent;

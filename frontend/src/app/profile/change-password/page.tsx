@@ -1,5 +1,6 @@
-const ProfilePage = () => {
-  return <div />;
+import { ChangePasswordComponent } from '@/shared/components/change-password';
+const ChangePasswordPage = () => {
+  return <ChangePasswordComponent />;
 };
 
-export default ProfilePage;
+export default ChangePasswordPage;

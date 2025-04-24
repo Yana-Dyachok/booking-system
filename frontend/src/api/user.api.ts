@@ -2,30 +2,12 @@ import { AxiosError } from 'axios';
 import api from './axios-instance.api';
 import { PATH_KEYS, HttpStatusCode } from '@/shared/types/types';
 import {
-  IRegisterData,
   IRegisterResponse,
   IChangePassword,
   ICreateUser,
 } from '@/shared/types/user.types';
 import { useAuthStore } from '../shared/store/use-auth.store';
 import { getUserId } from '@/utils/get-user-id.utils';
-
-export const createUser = async (
-  userData: IRegisterData,
-): Promise<IRegisterResponse> => {
-  try {
-    const response = await api.post(PATH_KEYS.USER, userData);
-    return response.data;
-  } catch (error) {
-    console.error('Error creating user:', error);
-    if (error instanceof AxiosError) {
-      if (error.response?.status === HttpStatusCode.BAD_REQUEST) {
-        throw new Error('Invalid user data provided');
-      }
-    }
-    throw error;
-  }
-};
 
 export const getUserByIdApi = async (): Promise<IRegisterResponse> => {
   const token = useAuthStore.getState().authToken;
@@ -100,19 +82,12 @@ export const changePasswordApi = async (passwordData: IChangePassword) => {
   const token = useAuthStore.getState().authToken;
   const id = getUserId(token);
   try {
-    const response = await api.post(
+    const response = await api.put(
       `${PATH_KEYS.USER}/${id}/change-password`,
       passwordData,
     );
     return response.data;
   } catch (error) {
-    console.error(`Error changing password for user with ID ${id}:`, error);
-    if (
-      error instanceof AxiosError &&
-      error.response?.status === HttpStatusCode.BAD_REQUEST
-    ) {
-      throw new Error('Invalid password data provided');
-    }
     throw error;
   }
 };

@@ -48,3 +48,12 @@ export interface IPersonalInfoData extends Omit<IUser, 'password'> {
   shippingAddress: string;
   phoneNumber: string;
 }
+
+export interface IChangePassword {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export interface IVallidPassword extends IChangePassword {
+  confirmPassword: string;
+}
