@@ -9,6 +9,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { User, Role } from '../../../prisma/prisma/generated/client';
 import { IBusinessUserPreview } from '@/common/types';
+import { QueryDto } from '../appointment/dto/query-appointment';
 
 @Injectable()
 export class UserService {
@@ -38,18 +39,38 @@ export class UserService {
 			where: { id },
 		});
 	}
+	async findAllBusinessUsers(
+		query: QueryDto,
+	): Promise<{ items: IBusinessUserPreview[]; total: number }> {
+		const { page = 1, limit = 10 } = query;
+		const skip = (Number(page) - 1) * Number(limit);
+		const take = Number(limit);
 
-	async findAllBusinessUsers(): Promise<IBusinessUserPreview[]> {
-		return this.prisma.user.findMany({
-			where: { role: 'BUSINESS' },
-			select: {
-				id: true,
-				fullName: true,
-				description: true,
-				email: true,
-				phoneNumber: true,
-			},
-		});
+		try {
+			const [items, total] = await this.prisma.$transaction([
+				this.prisma.user.findMany({
+					where: { role: 'BUSINESS' },
+					skip,
+					take,
+					select: {
+						id: true,
+						fullName: true,
+						description: true,
+						email: true,
+						phoneNumber: true,
+					},
+				}),
+				this.prisma.user.count({ where: { role: 'BUSINESS' } }),
+			]);
+
+			console.log('Items count:', items.length);
+			console.log('Total count:', total);
+
+			return { items, total };
+		} catch (error) {
+			console.error('Error fetching business users:', error);
+			throw error;
+		}
 	}
 
 	async updateUser(id: string, data: UpdateUserDto): Promise<User> {

@@ -8,6 +8,7 @@ import {
 	NotFoundException,
 	Req,
 	UseGuards,
+	Query,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { RolesGuard, Roles } from '../auth/guards/roles.guard';
@@ -17,7 +18,10 @@ import { ChangePasswordDto } from './dto/change-password.dto';
 import { RequestWithLoadedEntity } from '@/common/types';
 import { User, Role } from '../../../prisma/prisma/generated/client';
 import { IBusinessUserPreview } from '@/common/types';
+import { AtGuard } from '../auth';
+import { QueryDto } from '../appointment/dto/query-appointment';
 
+@UseGuards(AtGuard)
 @Controller('user')
 export class UserController {
 	constructor(private readonly userService: UserService) {}
@@ -30,8 +34,10 @@ export class UserController {
 	@Get('business')
 	@Roles(Role.CLIENT)
 	@UseGuards(AuthGuard('jwt'), RolesGuard)
-	async getAllBusinessUsers(): Promise<IBusinessUserPreview[]> {
-		return this.userService.findAllBusinessUsers();
+	async getAllBusinessUsers(
+		@Query() query: QueryDto,
+	): Promise<{ items: IBusinessUserPreview[]; total: number }> {
+		return this.userService.findAllBusinessUsers(query);
 	}
 
 	@Get(':id')

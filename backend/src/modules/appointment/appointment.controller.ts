@@ -7,6 +7,7 @@ import {
 	Body,
 	UseGuards,
 	Post,
+	Query,
 } from '@nestjs/common';
 import { AppointmentService } from './appointment.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
@@ -14,6 +15,7 @@ import { AtGuard } from '../auth';
 import { Roles, RolesGuard } from '../auth/guards/roles.guard';
 import { GetCurrentUserId } from '../auth/decorators';
 import { Role, Appointment } from '../../../prisma/prisma/generated/client';
+import { QueryDto } from './dto/query-appointment';
 
 @UseGuards(AtGuard)
 @Controller('appointments')
@@ -35,8 +37,9 @@ export class AppointmentController {
 	@UseGuards(RolesGuard)
 	getClientAppointments(
 		@GetCurrentUserId() id: string,
-	): Promise<Appointment[]> {
-		return this.appointmentService.findClientAppointments(id);
+		@Query() query: QueryDto,
+	): Promise<{ items: Appointment[]; total: number }> {
+		return this.appointmentService.findClientAppointments(id, query);
 	}
 
 	@Delete(':id')

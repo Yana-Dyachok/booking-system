@@ -36,3 +36,8 @@ export interface IBusinessUserPreview {
 	phoneNumber: string;
 	description: string | null;
 }
+
+export interface IQuery {
+	page?: number;
+	limit?: number;
+}
