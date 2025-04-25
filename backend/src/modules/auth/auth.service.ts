@@ -10,7 +10,7 @@ import { UserService } from '../user/user.service';
 import { RegisterUserDto } from '../user';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
-import { Role } from '../../../prisma/prisma/generated/client';
+import { Role, User } from '../../../prisma/prisma/generated/client';
 
 @Injectable()
 export class AuthService {
@@ -25,7 +25,7 @@ export class AuthService {
 			this.configService.getOrThrow<string>('JWT_SECRET_KEY');
 	}
 
-	async register(dto: RegisterUserDto): Promise<void> {
+	async register(dto: RegisterUserDto): Promise<User> {
 		const existingUser = await this.userService
 			.findByEmail(dto.email)
 			.catch(() => null);
@@ -39,7 +39,7 @@ export class AuthService {
 		const hashedPassword = await bcrypt.hash(dto.password, 10);
 		const userId = uuidv4();
 
-		await this.userService.createUser({
+		return await this.userService.createUser({
 			id: userId,
 			email: dto.email,
 			fullName: dto.fullName,
@@ -67,7 +67,11 @@ export class AuthService {
 		return tokens;
 	}
 
-	async getTokens(userId: string, email: string, role: Role) {
+	async getTokens(
+		userId: string,
+		email: string,
+		role: Role,
+	): Promise<{ accessToken: string; refreshToken: string }> {
 		const payload = { sub: userId, email, role };
 		const [accessToken, refreshToken] = await Promise.all([
 			this.jwtService.signAsync(payload, {
@@ -83,7 +87,10 @@ export class AuthService {
 		return { accessToken, refreshToken };
 	}
 
-	async updateRefreshTokenHash(userId: string, refreshToken: string) {
+	async updateRefreshTokenHash(
+		userId: string,
+		refreshToken: string,
+	): Promise<void> {
 		const hash = await bcrypt.hash(refreshToken, 10);
 		await this.userService.updateUser(userId, { hashedRt: hash });
 	}

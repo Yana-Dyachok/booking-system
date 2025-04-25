@@ -107,8 +107,12 @@ export class UserService {
 	async changePassword(
 		userId: string,
 		dto: ChangePasswordDto,
-		user: User,
 	): Promise<User> {
+		const user = await this.findById(userId);
+		if (!user) {
+			throw new NotFoundException(`User with ID ${userId} not found`);
+		}
+
 		let isPasswordValid = false;
 		try {
 			isPasswordValid = await bcrypt.compare(

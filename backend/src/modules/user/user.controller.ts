@@ -6,7 +6,6 @@ import {
 	Delete,
 	Body,
 	NotFoundException,
-	Req,
 	UseGuards,
 	Query,
 } from '@nestjs/common';
@@ -15,7 +14,6 @@ import { RolesGuard, Roles } from '../auth/guards/roles.guard';
 import { AuthGuard } from '@nestjs/passport';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
-import { RequestWithLoadedEntity } from '@/common/types';
 import { User, Role } from '../../../prisma/prisma/generated/client';
 import { IBusinessUserPreview } from '@/common/types';
 import { AtGuard } from '../auth';
@@ -76,9 +74,7 @@ export class UserController {
 	async changePassword(
 		@Param('id') id: string,
 		@Body() dto: ChangePasswordDto,
-		@Req() req: RequestWithLoadedEntity<User>,
-	) {
-		const user = req.entity;
-		return this.userService.changePassword(id, dto, user);
+	): Promise<User> {
+		return this.userService.changePassword(id, dto);
 	}
 }
