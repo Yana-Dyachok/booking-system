@@ -37,11 +37,8 @@ export const getUsersByRoleApi = async (
   query: QueryParams = {},
 ): Promise<IBusinessUsersResponse> => {
   try {
-    const token = useAuthStore.getState().authToken;
-    const headers = getHeaders(token);
     const response = await api.get(PATH_KEYS.USER_BUSINESS, {
-      params: query,
-      headers,
+      params: query
     });
 
     return response.data;

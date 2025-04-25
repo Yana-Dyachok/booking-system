@@ -11,7 +11,6 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { RolesGuard, Roles } from '../auth/guards/roles.guard';
-import { AuthGuard } from '@nestjs/passport';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { User, Role } from '../../../prisma/prisma/generated/client';
@@ -19,30 +18,26 @@ import { IBusinessUserPreview } from '@/common/types';
 import { AtGuard } from '../auth';
 import { QueryDto } from '../appointment/dto/query-appointment';
 
-@UseGuards(AtGuard)
 @Controller('user')
 export class UserController {
 	constructor(private readonly userService: UserService) {}
 
-	@Get()
-	async findAll(): Promise<User[]> {
-		return this.userService.findAll();
-	}
-
 	@Get('business')
 	@Roles(Role.CLIENT)
-	@UseGuards(AuthGuard('jwt'), RolesGuard)
+	@UseGuards(RolesGuard)
 	async getAllBusinessUsers(
 		@Query() query: QueryDto,
 	): Promise<{ items: IBusinessUserPreview[]; total: number }> {
 		return this.userService.findAllBusinessUsers(query);
 	}
 
+	@UseGuards(AtGuard)
 	@Get(':id')
 	async findById(@Param('id') id: string): Promise<User | null> {
 		return this.userService.findById(id);
 	}
 
+	@UseGuards(AtGuard)
 	@Put(':id')
 	async updateUser(
 		@Param('id') id: string,
@@ -58,6 +53,7 @@ export class UserController {
 		}
 	}
 
+	@UseGuards(AtGuard)
 	@Delete(':id')
 	async deleteUser(@Param('id') id: string): Promise<User> {
 		try {
@@ -70,6 +66,7 @@ export class UserController {
 		}
 	}
 
+	@UseGuards(AtGuard)
 	@Put(':id/change-password')
 	async changePassword(
 		@Param('id') id: string,
