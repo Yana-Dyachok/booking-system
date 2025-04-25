@@ -163,10 +163,15 @@ export const enum PATH_KEYS {
   USER = '/user',
   REFRESH = '/auth/refresh',
   LOGOUT = '/auth/logout',
-  USERS_BISSNES = '/user/BUSINESS',
+  USER_BUSINESS = '/user/business',
 }
 
 export enum Role {
   CLIENT = 'CLIENT',
   BUSINESS = 'BUSINESS',
+}
+
+export interface QueryParams {
+  page?: number;
+  limit?: number;
 }

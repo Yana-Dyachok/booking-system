@@ -5,15 +5,21 @@ import {
   IRegisterResponse,
   IChangePassword,
   ICreateUser,
-} from '@/shared/types/user.types';
+  IBusinessUsersResponse,
+  QueryParams,
+} from '@/shared/types';
 import { useAuthStore } from '../shared/store/use-auth.store';
-import { getUserId } from '@/utils/get-user-id.utils';
+import { getUserId, getHeaders } from '@/utils';
 
 export const getUserByIdApi = async (): Promise<IRegisterResponse> => {
   const token = useAuthStore.getState().authToken;
+  const header = getHeaders(token);
   const id = getUserId(token);
   try {
-    const response = await api.get(`${PATH_KEYS.USER}/${id}`);
+    const response = await api.get(
+      `${PATH_KEYS.USER}/${id}`,
+      header ? { headers: header } : undefined,
+    );
     return response.data;
   } catch (error) {
     console.error(`Error fetching user with ID ${id}:`, error);
@@ -27,13 +33,20 @@ export const getUserByIdApi = async (): Promise<IRegisterResponse> => {
   }
 };
 
-export const getUsersByRoleApi = async (): Promise<IRegisterResponse[]> => {
-  const role = useAuthStore.getState().role;
+export const getUsersByRoleApi = async (
+  query: QueryParams = {},
+): Promise<IBusinessUsersResponse> => {
   try {
-    const response = await api.get(`${PATH_KEYS.USER}/${role}`);
+    const token = useAuthStore.getState().authToken;
+    const headers = getHeaders(token);
+    const response = await api.get(PATH_KEYS.USER_BUSINESS, {
+      params: query,
+      headers,
+    });
+
     return response.data;
   } catch (error) {
-    console.error(`Error fetching users by role ${role}:`, error);
+    console.error('Error fetching business users:', error);
     throw error;
   }
 };
@@ -42,9 +55,14 @@ export const updateUserApi = async (
   updateData: Partial<ICreateUser>,
 ): Promise<IRegisterResponse> => {
   const token = useAuthStore.getState().authToken;
+  const header = getHeaders(token);
   const id = getUserId(token);
   try {
-    const response = await api.put(`${PATH_KEYS.USER}/${id}`, updateData);
+    const response = await api.put(
+      `${PATH_KEYS.USER}/${id}`,
+      updateData,
+      header ? { headers: header } : undefined,
+    );
     return response.data;
   } catch (error) {
     console.error(`Error updating user with ID ${id}:`, error);
@@ -59,11 +77,14 @@ export const updateUserApi = async (
 };
 
 export const deleteUserApi = async (): Promise<IRegisterResponse> => {
-  const token = useAuthStore.getState().authToken;
-  const id = getUserId(token);
+  const { logout, authToken } = useAuthStore.getState();
+  const header = getHeaders(authToken);
+  const id = getUserId(authToken);
   try {
-    const response = await api.delete(`${PATH_KEYS.USER}/${id}`);
-    const { logout } = useAuthStore.getState();
+    const response = await api.delete(
+      `${PATH_KEYS.USER}/${id}`,
+      header ? { headers: header } : undefined,
+    );
     logout();
     return response.data;
   } catch (error) {
@@ -80,11 +101,13 @@ export const deleteUserApi = async (): Promise<IRegisterResponse> => {
 
 export const changePasswordApi = async (passwordData: IChangePassword) => {
   const token = useAuthStore.getState().authToken;
+  const header = getHeaders(token);
   const id = getUserId(token);
   try {
     const response = await api.put(
       `${PATH_KEYS.USER}/${id}/change-password`,
       passwordData,
+      header ? { headers: header } : undefined,
     );
     return response.data;
   } catch (error) {

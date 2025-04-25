@@ -1,6 +1,6 @@
-import { RegisterForm } from '@/shared/components/register-form';
+import { BusinessComponents } from '@/shared/components/business';
 const BusinessPage = () => {
-  return <RegisterForm />;
+  return <BusinessComponents />;
 };
 
 export default BusinessPage;

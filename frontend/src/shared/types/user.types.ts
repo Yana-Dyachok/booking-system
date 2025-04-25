@@ -57,3 +57,16 @@ export interface IChangePassword {
 export interface IVallidPassword extends IChangePassword {
   confirmPassword: string;
 }
+
+export interface IBusinessUserPreview {
+  id: string;
+  fullName: string;
+  description: string;
+  email: string;
+  phoneNumber: string;
+}
+
+export interface IBusinessUsersResponse {
+  items: IBusinessUserPreview[];
+  total: number;
+}

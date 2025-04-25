@@ -4,6 +4,7 @@ import { ILoginData, ILoginResponse } from '@/shared/types/auth.types';
 import { IRegisterData, IRegisterResponse } from '@/shared/types/user.types';
 import { PATH_KEYS, HttpStatusCode } from '@/shared/types/types';
 import { useAuthStore } from '../shared/store/use-auth.store';
+import { getHeaders } from '@/utils';
 
 export const registerUserApi = async (
   userData: IRegisterData,
@@ -40,8 +41,14 @@ export const loginUserApi = async (
 export const refreshAccessToken = async (
   refreshToken: string,
 ): Promise<{ accessToken: string }> => {
+  const { authToken } = useAuthStore.getState();
+  const header = getHeaders(authToken);
   try {
-    const response = await api.post(PATH_KEYS.REFRESH, { refreshToken });
+    const response = await api.post(
+      PATH_KEYS.REFRESH,
+      { refreshToken },
+      { headers: header },
+    );
     return response.data;
   } catch (error) {
     console.error('Error refreshing token:', error);
@@ -58,10 +65,11 @@ export const refreshAccessToken = async (
 };
 
 export const logoutUserApi = async (): Promise<void | { error: string }> => {
-  const { logout } = useAuthStore.getState();
-  logout();
+  const { logout, authToken } = useAuthStore.getState();
+  const header = getHeaders(authToken);
   try {
-    await api.post(PATH_KEYS.LOGOUT);
+    await api.post(PATH_KEYS.LOGOUT, {}, { headers: header });
+    logout();
   } catch (error) {
     if (error instanceof AxiosError) {
       return { error: error.response?.data?.message || 'Logout failed' };
