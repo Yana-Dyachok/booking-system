@@ -11,11 +11,13 @@ export const ProfileComponent: React.FC = () => {
   return (
     <Wrapper>
       <div className={styles.profileBlock}>
-        <PersonalInfo />
         <div>
-          <LinkItem to="/profile/change-password" color="dark">
-            Change password
-          </LinkItem>
+          <PersonalInfo />
+          <div>
+            <LinkItem to="/profile/change-password" color="dark">
+              Change password
+            </LinkItem>
+          </div>
         </div>
         <DeleteAccountButton />
       </div>

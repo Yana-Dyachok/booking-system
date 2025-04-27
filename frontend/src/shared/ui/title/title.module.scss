@@ -1,6 +1,8 @@
 @use '../../styles/fonts.scss' as fonts;
+@use '../../styles/colors.scss' as colors;
 
 .title {
   text-align: center;
   font-family: 'Russo-one, sans serif';
+  color: colors.$c-yellow;
 }

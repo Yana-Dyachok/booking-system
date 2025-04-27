@@ -68,7 +68,7 @@ export const RegisterForm: React.FC = () => {
         <Input
           control={control}
           name="fullName"
-          label="Full name"
+          label="Full or Business name "
           defaultValue=""
         />
         <Input

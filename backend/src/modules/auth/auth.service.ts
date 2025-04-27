@@ -54,7 +54,7 @@ export class AuthService {
 	async login(
 		email: string,
 		password: string,
-	): Promise<{ accessToken: string; refreshToken: string }> {
+	): Promise<{ accessToken: string; refreshToken: string; role: string }> {
 		const user = await this.userService.findByEmail(email);
 		if (!user) throw new NotFoundException('Invalid credentials');
 
@@ -63,8 +63,7 @@ export class AuthService {
 
 		const tokens = await this.getTokens(user.id, user.email, user.role);
 		await this.updateRefreshTokenHash(user.id, tokens.refreshToken);
-
-		return tokens;
+		return { ...tokens, role: user.role };
 	}
 
 	async getTokens(

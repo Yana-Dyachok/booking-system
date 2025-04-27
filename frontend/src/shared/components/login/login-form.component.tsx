@@ -28,7 +28,7 @@ export const LoginForm: React.FC = () => {
     },
   });
   const router = useRouter();
-  const { setAuthToken, setRefreshToken } = useAuthStore();
+  const { setAuthToken, setRefreshToken, setRole } = useAuthStore();
 
   const {
     mutate,
@@ -44,6 +44,7 @@ export const LoginForm: React.FC = () => {
     onSuccess: (data): void => {
       setAuthToken(data.accessToken);
       setRefreshToken(data.refreshToken);
+      setRole(data.role);
       router.push('./');
     },
     onError: (error: AxiosError<{ message?: string }>): void => {

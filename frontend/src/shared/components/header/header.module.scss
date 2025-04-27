@@ -8,9 +8,10 @@
 }
 
 .wrapper {
+  width: 100%;
   max-width: 122rem;
-  display: grid;
-  grid-template-columns: 5fr 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 

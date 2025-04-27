@@ -6,7 +6,8 @@ import { Title } from '@/shared/ui/title';
 import { IBusinessUsersResponse, IBusinessUserPreview } from '@/shared/types';
 import { getUsersByRoleApi } from '@/api/user.api';
 import { BusinessItem } from './business-item';
-import styles from '../profile/profile.module.scss';
+import { Wrapper } from '@/shared/ui/wrapper';
+import styles from './business.module.scss';
 
 const fetchData = (async () => {
   try {
@@ -23,15 +24,15 @@ export const BusinessComponents: React.FC = () => {
   const dataUsers: IBusinessUserPreview[] = data?.items || [];
 
   return (
-    <Suspense fallback={<Loader />}>
-      <div className={styles.wrapper}>
-        <div className={styles.header}>
+    <Wrapper>
+      <Suspense fallback={<Loader />}>
+        <div className={styles.wrapper}>
           <Title title="Business users" />
+          {dataUsers.map((item, index) => (
+            <BusinessItem data={item} key={index + item.id} />
+          ))}
         </div>
-        {dataUsers.map((item, index) => (
-          <BusinessItem data={item} key={index + item.id} />
-        ))}
-      </div>
-    </Suspense>
+      </Suspense>
+    </Wrapper>
   );
 };

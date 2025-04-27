@@ -7,12 +7,13 @@ import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { schemaUpdateProfile } from '@/utils';
-import { IPersonalInfoData, ICreateUser } from '@/shared/types';
+import { IPersonalInfoData, ICreateUser, Role } from '@/shared/types';
 import { Loader } from '@/shared/ui/loader';
 import { getUserByIdApi, updateUserApi } from '@/api/user.api';
 import { Wrapper } from '@/shared/ui/wrapper';
 import { Title } from '@/shared/ui/title';
 import { BackButton } from '@/shared/ui/back-button/back-button';
+import { useAuthStore } from '@/shared/store';
 import styles from './edit-profile.module.scss';
 
 export const EditProfileComponent: React.FC = () => {
@@ -63,12 +64,11 @@ export const EditProfileComponent: React.FC = () => {
   };
 
   const currentValues = getValues();
-
+  const role = useAuthStore.getState().role;
   return (
     <Wrapper>
       <form className={styles.editForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.header}>
-          {' '}
           <BackButton /> <Title title="Edit personal information"></Title>
         </div>
 
@@ -81,7 +81,7 @@ export const EditProfileComponent: React.FC = () => {
         <Input
           control={control}
           name="fullName"
-          label="Full name"
+          label={role === Role.CLIENT ? 'Full name' : 'Business name'}
           defaultValue={currentValues.fullName}
         />
         <Input

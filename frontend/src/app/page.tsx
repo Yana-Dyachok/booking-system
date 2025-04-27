@@ -1,5 +1,10 @@
+import { Wrapper } from '@/shared/ui/wrapper';
 const Home = () => {
-  return <div>Ui</div>;
+  return (
+    <Wrapper>
+      <div>Ui</div>
+    </Wrapper>
+  );
 };
 
 export default Home;

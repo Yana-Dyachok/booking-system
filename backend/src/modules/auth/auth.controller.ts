@@ -33,7 +33,7 @@ export class AuthController {
 	@HttpCode(HttpStatus.OK)
 	login(
 		@Body() dto: LoginUserDto,
-	): Promise<{ accessToken: string; refreshToken: string }> {
+	): Promise<{ accessToken: string; refreshToken: string; role: string }> {
 		return this.authService.login(dto.email, dto.password);
 	}
 

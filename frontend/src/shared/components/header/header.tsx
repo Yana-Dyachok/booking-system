@@ -4,30 +4,34 @@ import { LogOutButton } from '../log-out-button/log-out-button.component';
 import { ProfileSvg } from '@/shared/assets/svg/profile.svg';
 import { LogoSvg } from '@/shared/assets/svg/logo.svg';
 import { LinkNav } from '@/shared/ui/link-nav';
+import { useAuthStore } from '@/shared/store';
+import { Role } from '@/shared/types';
 
 export const Header = () => {
+  const role = useAuthStore.getState().role;
   return (
     <header className={styles.header}>
       <div className={styles.wrapper}>
-        <div>
-          <LinkNav
-            href="/"
-            activeClassName={styles.active}
-            className={styles.link}
-          >
-            <LogoSvg />
-          </LinkNav>
-        </div>
+        <LinkNav
+          href="/"
+          activeClassName={styles.active}
+          className={styles.link}
+        >
+          <LogoSvg />
+        </LinkNav>
         <nav>
           <ul className={styles.navList}>
             <li>
-              <LinkNav
-                href="/business"
-                activeClassName={styles.active}
-                className={styles.link}
-              >
-                Business
-              </LinkNav>
+              {' '}
+              {role === Role.CLIENT && (
+                <LinkNav
+                  href="/business"
+                  activeClassName={styles.active}
+                  className={styles.link}
+                >
+                  Business
+                </LinkNav>
+              )}
             </li>
             <li>
               <LinkNav

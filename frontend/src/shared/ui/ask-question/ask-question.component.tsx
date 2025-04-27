@@ -16,7 +16,7 @@ export const AskQuestion: React.FC<AskQuestionProps> = ({
   return (
     <div className={styles.askBlock}>
       <h3>{text}</h3>
-      <LinkItem color="light" to={link}>
+      <LinkItem color="dark" to={link}>
         {linkText}
       </LinkItem>
     </div>

@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { Loader } from '@/shared/ui/loader';
 import { EditSVG } from '@/shared/assets/svg/edit.svg';
 import { Title } from '@/shared/ui/title';
-import { IRegisterResponse } from '@/shared/types';
+import { IRegisterResponse, Role } from '@/shared/types';
 import { getUserByIdApi } from '@/api/user.api';
+import { useAuthStore } from '@/shared/store';
 import styles from './profile.module.scss';
 
 const fetchData = (async () => {
@@ -21,10 +22,10 @@ const fetchData = (async () => {
 
 export const PersonalInfo: React.FC = () => {
   const data: IRegisterResponse | null = use(fetchData);
-
+  const role = useAuthStore.getState().role;
   return (
     <Suspense fallback={<Loader />}>
-      <div className={styles.wrapper}>
+      <div>
         <div className={styles.header}>
           <Title title="Personal information" />
           <Link href="/profile/edit-profile" className={styles.edit}>
@@ -33,24 +34,26 @@ export const PersonalInfo: React.FC = () => {
         </div>
         <ul>
           <li className={styles.item}>
-            <span className={styles.titles}>Full Name:</span>{' '}
+            <span className={styles.titles}>
+              {role === Role.CLIENT ? 'Full name' : 'Business name'}:
+            </span>
             <span>{data?.fullName || 'N/A'}</span>
           </li>
           <li className={styles.item}>
-            <span className={styles.titles}>Email:</span>{' '}
+            <span className={styles.titles}>Email:</span>
             <span>{data?.email || 'N/A'}</span>
           </li>
           <li className={styles.item}>
-            <span className={styles.titles}>Phone:</span>{' '}
+            <span className={styles.titles}>Phone:</span>
             <span>{data?.phoneNumber || 'N/A'}</span>
           </li>
           <li className={styles.item}>
-            <span className={styles.titles}>Address:</span>{' '}
+            <span className={styles.titles}>Address:</span>
             <span>{data?.shippingAddress || 'N/A'}</span>
           </li>
           {data?.description && (
             <li className={styles.item}>
-              <span className={styles.titles}>Description:</span>{' '}
+              <span className={styles.titles}>Description:</span>
               <span>{data.description}</span>
             </li>
           )}

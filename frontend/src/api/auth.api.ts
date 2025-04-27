@@ -10,9 +10,7 @@ export const registerUserApi = async (
   userData: IRegisterData,
 ): Promise<IRegisterResponse> => {
   try {
-    const { setRole } = useAuthStore.getState();
     const { data } = await api.post(PATH_KEYS.REGISTER, userData);
-    setRole(data.role);
     return data;
   } catch (error: unknown) {
     throw error;

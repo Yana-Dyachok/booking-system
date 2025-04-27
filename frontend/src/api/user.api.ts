@@ -38,7 +38,7 @@ export const getUsersByRoleApi = async (
 ): Promise<IBusinessUsersResponse> => {
   try {
     const response = await api.get(PATH_KEYS.USER_BUSINESS, {
-      params: query
+      params: query,
     });
 
     return response.data;

@@ -1,0 +1,30 @@
+@use '../../styles/colors.scss' as colors;
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 122rem;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.edit:hover {
+  color: colors.$c-blue-400;
+}
+
+.titles {
+  color: colors.$c-gray;
+  margin-right: 1rem;
+}
+
+.blockItem {
+  background-color: colors.$c-blue-800;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.item {
+  padding-bottom: 1rem;
+}

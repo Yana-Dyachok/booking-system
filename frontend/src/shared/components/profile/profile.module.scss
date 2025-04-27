@@ -2,9 +2,11 @@
 
 .profileBlock {
   display: flex;
+  width: 100%;
   flex-direction: column;
+  justify-content: space-between;
+  max-width: 122rem;
   gap: 1rem;
-  padding-top: 3rem;
 }
 
 .edit:hover {
@@ -15,11 +17,13 @@
   display: flex;
   gap: 2rem;
   align-items: center;
+  justify-content: center;
+  padding-bottom: 1rem;
 }
 
 .titles {
   color: colors.$c-gray;
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 
 .item {
