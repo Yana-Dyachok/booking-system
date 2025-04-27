@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "npm run lint-backend && npm run lint-frontend",
+    "lint-backend": "cd backend && npm run lint",
+    "lint-frontend": "cd frontend && npm run lint"
   },
   "keywords": [],
   "author": "",
