@@ -11,6 +11,7 @@ import { RegisterUserDto } from '../user';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import { Role, User } from '../../../prisma/prisma/generated/client';
+import { ILoginResponse } from '@/common/types';
 
 @Injectable()
 export class AuthService {
@@ -51,10 +52,7 @@ export class AuthService {
 		});
 	}
 
-	async login(
-		email: string,
-		password: string,
-	): Promise<{ accessToken: string; refreshToken: string; role: string }> {
+	async login(email: string, password: string): Promise<ILoginResponse> {
 		const user = await this.userService.findByEmail(email);
 		if (!user) throw new NotFoundException('Invalid credentials');
 

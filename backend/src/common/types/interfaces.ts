@@ -15,6 +15,12 @@ export interface ILoginDTO {
 	password: string;
 }
 
+export interface ILoginResponse {
+	accessToken: string;
+	refreshToken: string;
+	role: Role;
+}
+
 export interface IConfig {
 	port: number;
 	secret_key: string;

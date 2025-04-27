@@ -16,6 +16,7 @@ import { RtGuard } from './guards/rt-token.guard';
 import { GetCurrentUserId } from './decorators';
 import { GetUserRefresh } from './decorators/get-user-refresh.decorators';
 import { User } from 'prisma/prisma/generated/client';
+import { ILoginResponse } from '@/common/types';
 
 @Controller('auth')
 export class AuthController {
@@ -31,9 +32,7 @@ export class AuthController {
 	@Public()
 	@Post('login')
 	@HttpCode(HttpStatus.OK)
-	login(
-		@Body() dto: LoginUserDto,
-	): Promise<{ accessToken: string; refreshToken: string; role: string }> {
+	login(@Body() dto: LoginUserDto): Promise<ILoginResponse> {
 		return this.authService.login(dto.email, dto.password);
 	}
 
