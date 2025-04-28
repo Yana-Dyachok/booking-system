@@ -32,6 +32,15 @@ export const DateTimeField = <T extends FieldValues>({
               borderRadius: '5px',
             }}
             format={type === 'date' ? 'YYYY/MM/DD' : undefined}
+            slotProps={{
+              textField: {
+                InputProps: {
+                  sx: {
+                    fontSize: '20px',
+                  },
+                },
+              },
+            }}
           />
         )}
       />

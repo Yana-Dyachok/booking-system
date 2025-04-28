@@ -12,10 +12,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
   padding: 1rem;
 }
 
 .title {
   text-align: center;
   font-size: 1.5rem;
+}
+
+.ghLink {
+  color: colors.$c-white;
+}
+
+.ghLink:hover {
+  color: colors.$c-blue-400;
 }
