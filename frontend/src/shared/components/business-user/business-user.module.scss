@@ -17,20 +17,6 @@
   gap: 2rem;
 }
 
-.inputBlock {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 1rem;
-}
-
-.datePicker {
-  width: fit-content;
-  padding: 1rem;
-  border-width: 0.1rem;
-  border-radius: 1rem;
-  background-color: colors.$c-blue-800;
-}
-
 .header {
   display: grid;
   grid-template-columns: 0.5fr 4fr;
@@ -44,6 +30,8 @@
 }
 
 .error {
+  text-align: center;
+  font-size: 1.5rem;
   padding: 1rem 0 0 0.5rem;
   color: colors.$c-red;
   min-height: 2rem;

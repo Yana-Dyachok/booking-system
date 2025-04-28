@@ -1,0 +1,15 @@
+@use '../../styles/colors.scss' as colors;
+
+.inputBlock {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+}
+
+.datePicker {
+  width: fit-content;
+  padding: 1rem;
+  border-width: 0.1rem;
+  border-radius: 1rem;
+  background-color: colors.$c-blue-800;
+}
