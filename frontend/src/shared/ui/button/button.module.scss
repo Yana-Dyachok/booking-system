@@ -45,3 +45,9 @@
     box-shadow: 2px 4px 4px 0 colors.$c-yellow;
   }
 }
+
+@media (max-width: 480px) {
+  .button {
+    font-size: 1.6rem;
+  }
+}

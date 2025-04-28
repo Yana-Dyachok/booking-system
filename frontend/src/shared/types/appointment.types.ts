@@ -2,9 +2,9 @@ import { IUser } from './user.types';
 import { Dayjs } from 'dayjs';
 
 export interface IAppointment {
-  date: Date | null;
+  date: string;
   time: string;
-  duration: string;
+  durationMin: number;
 }
 
 export interface IAppointmentInput {

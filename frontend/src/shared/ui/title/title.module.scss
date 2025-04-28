@@ -6,3 +6,9 @@
   font-family: 'Russo-one, sans serif';
   color: colors.$c-yellow;
 }
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.7rem;
+  }
+}

@@ -7,13 +7,22 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
 import { Title } from '@/shared/ui/title';
 import { BackButton } from '@/shared/ui/back-button/back-button';
 import { Button } from '@/shared/ui/button';
 import { Wrapper } from '@/shared/ui/wrapper';
+import { Loader } from '@/shared/ui/loader';
 import { schemaMakeAppointment } from '@/utils';
-import { IAppointmentInput, IAppointment } from '@/shared/types';
+import {
+  IAppointmentInput,
+  IAppointmentRequest,
+  IAppointmentResponse,
+} from '@/shared/types';
 import { InputError } from '@/shared/ui/input-error';
+import { createAppointmentApi } from '@/api/appointment.api';
 import styles from './business-user.module.scss';
 
 export const BusinessUser: React.FC<{ id: string }> = ({ id }) => {
@@ -22,7 +31,7 @@ export const BusinessUser: React.FC<{ id: string }> = ({ id }) => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { isDirty, isValid, errors },
   } = useForm<IAppointmentInput>({
     resolver: yupResolver(schemaMakeAppointment),
     defaultValues: {
@@ -39,17 +48,36 @@ export const BusinessUser: React.FC<{ id: string }> = ({ id }) => {
     }
     return 0;
   };
-  const onSubmit = (data: IAppointmentInput) => {
-    const appointment: IAppointment = {
-      date: data.date ? dayjs(data.date).toDate() : null,
-      time: data.startTime ? dayjs(data.startTime).format('HH:mm') : '',
-      duration: `${calculateDuration(
-        dayjs(data.startTime),
-        dayjs(data.endTime),
-      )}`,
-    };
 
-    console.log('appointment: ', appointment);
+  const { mutate: createAppointment, isPending } = useMutation<
+    IAppointmentResponse,
+    AxiosError,
+    IAppointmentInput
+  >({
+    mutationFn: async (
+      data: IAppointmentInput,
+    ): Promise<IAppointmentResponse> => {
+      const appointment: IAppointmentRequest = {
+        businessId: id,
+        date: dayjs(data.date).format('YYYY-MM-DD'),
+        time: dayjs(data.startTime).format('HH:mm'),
+        durationMin: calculateDuration(
+          dayjs(data.startTime),
+          dayjs(data.endTime),
+        ),
+      };
+      return await createAppointmentApi(appointment);
+    },
+    onSuccess: () => {
+      toast.success('Appointment created!');
+    },
+    onError: (error: AxiosError): void => {
+      const axiosError = error as AxiosError<{ message: string }>;
+      toast.error(axiosError.response?.data.message || 'Something went wrong.');
+    },
+  });
+  const onSubmit = (data: IAppointmentInput) => {
+    createAppointment(data);
   };
 
   return (
@@ -131,8 +159,12 @@ export const BusinessUser: React.FC<{ id: string }> = ({ id }) => {
             </div>
           </div>
           <div className={styles.buttonBlock}>
-            <Button btnType="submit" color="light">
-              Create Meeting
+            <Button
+              btnType="submit"
+              color="light"
+              disabled={isPending || !isDirty || !isValid}
+            >
+              {isPending ? <Loader /> : 'Create Meeting'}
             </Button>
           </div>
         </form>

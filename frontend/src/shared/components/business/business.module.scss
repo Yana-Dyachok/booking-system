@@ -22,9 +22,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 2rem;
+  border-radius: 1rem;
 }
 
 .item {
   padding-bottom: 1rem;
+}
+
+@media (max-width: 480px) {
+  .blockItem {
+    flex-direction: column;
+    gap: 2rem;
+  }
 }
