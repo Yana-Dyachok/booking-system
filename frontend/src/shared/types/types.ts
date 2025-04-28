@@ -164,6 +164,8 @@ export const enum PATH_KEYS {
   REFRESH = '/auth/refresh',
   LOGOUT = '/auth/logout',
   USER_BUSINESS = '/user/business',
+  APPOINTMENTS = '/appointments',
+  APPOINTMENTS_CLIENT = '/appointments/client',
 }
 
 export enum Role {

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { IAuthState } from '../types/auth.types';
+import { Role } from '../types';
 
 export const useAuthStore = create<IAuthState>()(
   persist(
@@ -10,7 +11,7 @@ export const useAuthStore = create<IAuthState>()(
       role: null,
       setAuthToken: (token: string | null) => set({ authToken: token }),
       setRefreshToken: (token: string | null) => set({ refreshToken: token }),
-      setRole: (role: string | null) => set({ role }),
+      setRole: (role: Role | null) => set({ role }),
       logout: () => set({ authToken: null, refreshToken: null, role: null }),
     }),
     {

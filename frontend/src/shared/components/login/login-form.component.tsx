@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import { ILoginResponse, ILoginData } from '@/shared/types/auth.types';
 import { Button } from '@/shared/ui/button/button.component';
-import { schemaLogin } from '@/utils/validation.schema';
+import { schemaLogin } from '@/utils/validation-schema.utils';
 import { Input } from '@/shared/ui/input';
 import { useAuthStore } from '../../store/use-auth.store';
 import { loginUserApi } from '@/api/auth.api';

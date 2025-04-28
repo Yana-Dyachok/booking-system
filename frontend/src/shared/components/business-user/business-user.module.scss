@@ -1,0 +1,57 @@
+@use '../../styles/colors.scss' as colors;
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 122rem;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.inputBlock {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+}
+
+.datePicker {
+  width: fit-content;
+  padding: 1rem;
+  border-width: 0.1rem;
+  border-radius: 1rem;
+  background-color: colors.$c-blue-800;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 0.5fr 4fr;
+  padding-bottom: 3rem;
+}
+
+.buttonBlock {
+  width: 25rem;
+  align-self: center;
+  justify-self: first baseline;
+}
+
+.error {
+  padding: 1rem 0 0 0.5rem;
+  color: colors.$c-red;
+  min-height: 2rem;
+}
+
+@media (max-width: 830px) {
+  .inputsContainer {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+}

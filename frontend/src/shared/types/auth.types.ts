@@ -5,7 +5,7 @@ export interface IAuthState {
   role: Role | null;
   setAuthToken: (token: string | null) => void;
   setRefreshToken: (token: string | null) => void;
-  setRole: (role: string | null) => void;
+  setRole: (role: Role | null) => void;
   logout: () => void;
 }
 
