@@ -17,7 +17,13 @@ export class AppointmentService {
 		clientId: string,
 		dto: CreateAppointmentDto,
 	): Promise<Appointment> {
+		if (!dto.date || !dto.time) {
+			throw new BadRequestException('Date and time must be provided');
+		}
 		const startDate = new Date(`${dto.date}T${dto.time}:00`);
+		if (isNaN(startDate.getTime())) {
+			throw new BadRequestException('Invalid date or time format');
+		}
 		const endDate = new Date(
 			startDate.getTime() + dto.durationMin * 60 * 1000,
 		);

@@ -17,14 +17,13 @@ import { GetCurrentUserId } from '../auth/decorators';
 import { Role, Appointment } from '../../../prisma/prisma/generated/client';
 import { QueryDto } from './dto/query-appointment';
 
-@UseGuards(AtGuard)
 @Controller('appointments')
 export class AppointmentController {
 	constructor(private readonly appointmentService: AppointmentService) {}
 
 	@Post()
 	@Roles(Role.CLIENT)
-	@UseGuards(RolesGuard)
+	@UseGuards(AtGuard, RolesGuard)
 	create(
 		@Body() dto: CreateAppointmentDto,
 		@GetCurrentUserId() id: string,
@@ -44,14 +43,14 @@ export class AppointmentController {
 
 	@Delete(':id')
 	@Roles(Role.CLIENT)
-	@UseGuards(RolesGuard)
+	@UseGuards(AtGuard, RolesGuard)
 	delete(@Param('id') id: string): Promise<Appointment> {
 		return this.appointmentService.delete(id);
 	}
 
 	@Put(':id')
 	@Roles(Role.CLIENT)
-	@UseGuards(RolesGuard)
+	@UseGuards(AtGuard, RolesGuard)
 	update(
 		@Param('id') id: string,
 		@Body() dto: CreateAppointmentDto,
