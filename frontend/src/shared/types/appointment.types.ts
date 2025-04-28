@@ -28,3 +28,8 @@ export interface IAppointmentResponse {
   business: IUser;
   createdAt: Date;
 }
+
+export interface IAllAppointmentResponse {
+  items: IAppointmentResponse[];
+  total: number;
+}

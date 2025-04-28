@@ -31,11 +31,11 @@ export class AppointmentController {
 		return this.appointmentService.create(id, dto);
 	}
 
-	@Get('client')
+	@Get(':id/client')
 	@Roles(Role.CLIENT)
 	@UseGuards(RolesGuard)
 	getClientAppointments(
-		@GetCurrentUserId() id: string,
+		@Param('id') id: string,
 		@Query() query: QueryDto,
 	): Promise<{ items: Appointment[]; total: number }> {
 		return this.appointmentService.findClientAppointments(id, query);

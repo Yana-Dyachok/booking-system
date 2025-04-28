@@ -32,7 +32,9 @@ export const getClientAppointmentsApi = async (
   query: QueryParams = {},
 ): Promise<{ items: IAppointmentResponse[]; total: number }> => {
   try {
-    const response = await api.get(`${PATH_KEYS.APPOINTMENTS_CLIENT}`, {
+    const token = useAuthStore.getState().authToken;
+    const id = getUserId(token);
+    const response = await api.get(`${PATH_KEYS.APPOINTMENTS}/${id}/client`, {
       params: query,
     });
     return response.data;
@@ -62,9 +64,10 @@ export const updateAppointmentApi = async (
   }
 };
 
-export const deleteAppointmentApi = async (): Promise<IAppointmentResponse> => {
+export const deleteAppointmentApi = async (
+  id: string,
+): Promise<IAppointmentResponse> => {
   const token = useAuthStore.getState().authToken;
-  const id = getUserId(token);
   const header = getHeaders(token);
 
   try {

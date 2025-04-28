@@ -5,11 +5,11 @@ import { IBusinessUserPreview } from '@/shared/types';
 import { Button } from '@/shared/ui/button';
 import styles from './business.module.scss';
 
-interface IBusinessUserProps {
+interface BusinessUserProps {
   data: IBusinessUserPreview;
 }
 
-export const BusinessItem: React.FC<IBusinessUserProps> = ({ data }) => {
+export const BusinessItem: React.FC<BusinessUserProps> = ({ data }) => {
   return (
     <div className={styles.blockItem}>
       <ul>

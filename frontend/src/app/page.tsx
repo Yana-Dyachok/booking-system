@@ -1,10 +1,7 @@
-import { Wrapper } from '@/shared/ui/wrapper';
+import { ClientAppointments } from '@/shared/components/client-appointments';
+
 const Home = () => {
-  return (
-    <Wrapper>
-      <div>Ui</div>
-    </Wrapper>
-  );
+  return <ClientAppointments />;
 };
 
 export default Home;

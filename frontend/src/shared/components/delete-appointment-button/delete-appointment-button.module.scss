@@ -1,0 +1,6 @@
+@use '../../styles/colors.scss' as colors;
+
+.delete:hover {
+  color: colors.$c-blue-400;
+  cursor: pointer;
+}

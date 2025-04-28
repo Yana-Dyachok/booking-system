@@ -1,11 +1,14 @@
 @use '../../styles/colors.scss' as colors;
-
 .wrapper {
   display: flex;
   width: 100%;
   max-width: 122rem;
   flex-direction: column;
   gap: 2rem;
+}
+
+.edit:hover {
+  color: colors.$c-blue-400;
 }
 
 .titles {
@@ -38,6 +41,12 @@
 
 .item {
   padding-bottom: 1rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 }
 
 .pagination {
