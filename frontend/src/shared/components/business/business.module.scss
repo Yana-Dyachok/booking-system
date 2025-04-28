@@ -17,6 +17,19 @@
   margin-right: 1rem;
 }
 
+.blockInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.usersBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .blockItem {
   background-color: colors.$c-blue-800;
   display: flex;
@@ -30,9 +43,51 @@
   padding-bottom: 1rem;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+
+  :global(.MuiPaginationItem-root) {
+    color: inherit;
+    font-size: 2.2rem;
+  }
+  :global(.MuiPaginationItem-root:hover) {
+    background-color: colors.$c-blue-800;
+    cursor: pointer;
+  }
+  :global(.MuiPaginationItem-root.MuiPaginationItem-root.Mui-selected) {
+    background-color: colors.$c-blue-400;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  :global(.MuiPaginationItem-previousNext) {
+    color: inherit;
+  }
+}
+
+@media (max-width: 768px) {
+  .pagination {
+    padding: 1rem 0;
+
+    :global(.MuiPaginationItem-root) {
+      font-size: 1.6rem;
+    }
+  }
+  .title {
+    text-align: center;
+    font-size: 2rem;
+  }
+}
+
 @media (max-width: 480px) {
   .blockItem {
     flex-direction: column;
     gap: 2rem;
+  }
+  .pagination {
+    :global(.MuiPaginationItem-root) {
+      font-size: 1.2rem;
+    }
   }
 }

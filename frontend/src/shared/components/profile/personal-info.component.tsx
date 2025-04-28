@@ -1,5 +1,3 @@
-'use client';
-
 import React, { Suspense, use } from 'react';
 import Link from 'next/link';
 import { Loader } from '@/shared/ui/loader';

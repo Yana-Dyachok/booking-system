@@ -1,6 +1,7 @@
 'use client';
 
-import React, { Suspense, use } from 'react';
+import React, { useEffect, useState } from 'react';
+import Pagination from '@mui/material/Pagination';
 import { Loader } from '@/shared/ui/loader';
 import { Title } from '@/shared/ui/title';
 import { IBusinessUsersResponse, IBusinessUserPreview } from '@/shared/types';
@@ -9,30 +10,59 @@ import { BusinessItem } from './business-item';
 import { Wrapper } from '@/shared/ui/wrapper';
 import styles from './business.module.scss';
 
-const fetchData = (async () => {
-  try {
-    const data = await getUsersByRoleApi();
-    return data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return null;
-  }
-})();
-
 export const BusinessComponents: React.FC = () => {
-  const data: IBusinessUsersResponse | null = use(fetchData);
+  const [data, setData] = useState<IBusinessUsersResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getUsersByRoleApi();
+        setData(response);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
   const dataUsers: IBusinessUserPreview[] = data?.items || [];
+  const totalItems: number = data?.total || 0;
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Wrapper>
-      <Suspense fallback={<Loader />}>
-        <div className={styles.wrapper}>
-          <Title title="Business users" />
-          {dataUsers.map((item, index) => (
-            <BusinessItem data={item} key={index + item.id} />
-          ))}
-        </div>
-      </Suspense>
+      <div className={styles.wrapper}>
+        <Title title="Business users" />
+        {+totalItems > 0 ? (
+          <div className={styles.blockInner}>
+            <div className={styles.usersBlock}>
+              {dataUsers.map((item, index) => (
+                <BusinessItem data={item} key={index + item.id} />
+              ))}
+            </div>
+            <Pagination
+              className={styles.pagination}
+              count={Math.ceil(+totalItems / 5)}
+              page={page}
+              onChange={handleChange}
+            />
+          </div>
+        ) : (
+          <h2 className={styles.titles}>There are no users</h2>
+        )}
+      </div>
     </Wrapper>
   );
 };

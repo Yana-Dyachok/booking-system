@@ -2,12 +2,20 @@
 .footer {
   display: flex;
   justify-content: center;
-  padding: 3rem 0.5rem 6.2rem;
+  min-height: 10vh;
+  background-color: colors.$c-blue-800;
 }
 
 .wrapper {
-  max-width: 122.5rem;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  max-width: 122.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
 }

@@ -26,12 +26,10 @@ import { createAppointmentApi } from '@/api/appointment.api';
 import styles from './business-user.module.scss';
 
 export const BusinessUser: React.FC<{ id: string }> = ({ id }) => {
-  console.log(id);
-
   const {
     control,
     handleSubmit,
-    formState: { isDirty, isValid, errors },
+    formState: { errors },
   } = useForm<IAppointmentInput>({
     resolver: yupResolver(schemaMakeAppointment),
     defaultValues: {
@@ -159,11 +157,7 @@ export const BusinessUser: React.FC<{ id: string }> = ({ id }) => {
             </div>
           </div>
           <div className={styles.buttonBlock}>
-            <Button
-              btnType="submit"
-              color="light"
-              disabled={isPending || !isDirty || !isValid}
-            >
+            <Button btnType="submit" color="light" disabled={isPending}>
               {isPending ? <Loader /> : 'Create Meeting'}
             </Button>
           </div>
