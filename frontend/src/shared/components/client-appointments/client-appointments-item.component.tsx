@@ -1,19 +1,17 @@
 'use client';
 
 import React from 'react';
-import { IAppointmentResponse } from '@/shared/types';
+import { ClientAppointmentsProps } from '@/shared/types';
 import { DeleteAppointmentButton } from '../delete-appointment-button/delete-appointment-button.component';
 import { EditSVG } from '@/shared/assets/svg/edit.svg';
 import { formatDate, formatTime } from '@/utils';
 import Link from 'next/link';
-import styles from './client-appointment.module.scss';
-
-interface ClientAppointmentsProps {
-  data: IAppointmentResponse;
-}
+import styles from '../business/business.module.scss';
 
 export const ClientAppointmentsItem: React.FC<ClientAppointmentsProps> = ({
   data,
+  setData,
+  page,
 }) => {
   return (
     <div className={styles.blockItem}>
@@ -39,7 +37,7 @@ export const ClientAppointmentsItem: React.FC<ClientAppointmentsProps> = ({
         <Link href={`/appointments/${data.id}`} className={styles.edit}>
           <EditSVG />
         </Link>
-        <DeleteAppointmentButton id={data.id} />
+        <DeleteAppointmentButton id={data.id} setData={setData} page={page} />
       </div>
     </div>
   );

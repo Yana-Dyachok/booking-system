@@ -33,3 +33,15 @@ export interface IAllAppointmentResponse {
   items: IAppointmentResponse[];
   total: number;
 }
+
+export interface AppointmentDataProps {
+  setData: React.Dispatch<React.SetStateAction<IAllAppointmentResponse | null>>;
+  id: string;
+  page: number;
+}
+
+export interface ClientAppointmentsProps {
+  setData: React.Dispatch<React.SetStateAction<IAllAppointmentResponse | null>>;
+  data: IAppointmentResponse;
+  page: number;
+}

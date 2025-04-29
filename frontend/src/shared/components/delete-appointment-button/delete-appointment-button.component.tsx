@@ -1,13 +1,21 @@
 'use client';
 
 import React, { useState } from 'react';
-import { deleteAppointmentApi } from '@/api/appointment.api';
+import {
+  deleteAppointmentApi,
+  getClientAppointmentsApi,
+} from '@/api/appointment.api';
 import { ConfirmationModal } from '@/shared/ui/confirmation-modal/confirmation-modal.component';
 import { DeleteSVG } from '@/shared/assets/svg/delete.svg';
+import { AppointmentDataProps } from '@/shared/types';
 import { toast } from 'react-toastify';
 import styles from './delete-appointment-button.module.scss';
 
-export const DeleteAppointmentButton: React.FC<{ id: string }> = ({ id }) => {
+export const DeleteAppointmentButton: React.FC<AppointmentDataProps> = ({
+  id,
+  setData,
+  page,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -22,6 +30,8 @@ export const DeleteAppointmentButton: React.FC<{ id: string }> = ({ id }) => {
     try {
       await deleteAppointmentApi(id);
       toast.success('Appointment deleted');
+      const updatedData = await getClientAppointmentsApi({ page, limit: 5 });
+      setData(updatedData);
     } catch (error) {
       toast.error(`${error}`);
     } finally {

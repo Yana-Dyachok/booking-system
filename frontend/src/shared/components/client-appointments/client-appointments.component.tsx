@@ -8,7 +8,7 @@ import { IAppointmentResponse, IAllAppointmentResponse } from '@/shared/types';
 import { getClientAppointmentsApi } from '@/api/appointment.api';
 import { ClientAppointmentsItem } from './client-appointments-item.component';
 import { Wrapper } from '@/shared/ui/wrapper';
-import styles from './client-appointment.module.scss';
+import styles from '../business/business.module.scss';
 
 export const ClientAppointments: React.FC = () => {
   const [data, setData] = useState<IAllAppointmentResponse | null>(null);
@@ -50,7 +50,12 @@ export const ClientAppointments: React.FC = () => {
           <div className={styles.blockInner}>
             <div className={styles.usersBlock}>
               {dataUsers.map((item, index) => (
-                <ClientAppointmentsItem data={item} key={index + item.id} />
+                <ClientAppointmentsItem
+                  data={item}
+                  key={index + item.id}
+                  setData={setData}
+                  page={page}
+                />
               ))}
             </div>
             <Pagination

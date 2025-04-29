@@ -22,9 +22,11 @@ export const BusinessItem: React.FC<BusinessUserProps> = ({ data }) => {
           <span>{data.email || 'N/A'}</span>
         </li>
       </ul>
-      <Button btnType="button" to={`/business/${data.id}`} color="dark">
-        Make Appointments
-      </Button>
+      <div className={styles.button}>
+        <Button btnType="button" to={`/business/${data.id}`} color="dark">
+          Make Appointments
+        </Button>
+      </div>
     </div>
   );
 };

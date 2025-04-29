@@ -4,7 +4,7 @@ import { Title } from '@/shared/ui/title';
 const Home = () => {
   return (
     <Wrapper>
-      <Title title="Welcome to booking system!"></Title>
+      <Title title="Welcome to Booking System!"></Title>
     </Wrapper>
   );
 };
