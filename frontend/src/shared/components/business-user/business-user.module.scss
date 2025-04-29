@@ -20,7 +20,13 @@
 .header {
   display: grid;
   grid-template-columns: 0.5fr 4fr;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
+}
+
+.titles {
+  padding-bottom: 2rem;
+  text-align: center;
+  color: colors.$c-gray;
 }
 
 .buttonBlock {

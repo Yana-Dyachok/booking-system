@@ -80,7 +80,7 @@ export const BusinessUser: React.FC = () => {
           </div>
           <div className={styles.buttonBlock}>
             <Button btnType="submit" color="light" disabled={isPending}>
-              {isPending ? <Loader /> : 'Create Meeting'}
+              {isPending ? <Loader /> : 'Create Appointment'}
             </Button>
           </div>
         </form>
