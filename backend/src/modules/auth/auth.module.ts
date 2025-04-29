@@ -6,6 +6,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AtStrategy } from './strategies/access-token.strategy';
 import { RtStrategy } from './strategies/rt-token.strategy';
+import { AtGuard } from './guards/access-token.guard';
+import { RolesGuard } from './guards/roles.guard';
 
 @Module({
 	imports: [
@@ -20,7 +22,14 @@ import { RtStrategy } from './strategies/rt-token.strategy';
 		ConfigModule,
 	],
 	controllers: [AuthController],
-	providers: [AuthService, UserService, AtStrategy, RtStrategy],
+	providers: [
+		AuthService,
+		UserService,
+		AtStrategy,
+		RtStrategy,
+		AtGuard,
+		RolesGuard,
+	],
 	exports: [AuthService],
 })
 export class AuthModule {}

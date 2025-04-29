@@ -5,3 +5,4 @@ export * from './validation-schema.utils';
 export * from './get-header.utils';
 export * from './time-validation-schema.utils';
 export * from './format-time.utils';
+export * from './get-user-role.utils';

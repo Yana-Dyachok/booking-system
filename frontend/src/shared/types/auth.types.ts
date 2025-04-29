@@ -12,7 +12,6 @@ export interface IAuthState {
 export interface ILoginResponse {
   accessToken: string;
   refreshToken: string;
-  role: Role;
 }
 
 export interface ILoginData {

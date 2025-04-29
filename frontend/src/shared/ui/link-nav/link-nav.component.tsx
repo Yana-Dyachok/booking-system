@@ -19,7 +19,7 @@ export const LinkNav: React.FC<LinkNavProps> = ({
   ...props
 }) => {
   const pathname = usePathname();
-  const isActive = pathname.startsWith(href);
+  const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   const linkClassName = isActive
     ? `${className || ''} ${activeClassName}`.trim()

@@ -99,6 +99,27 @@ export class AppointmentService {
 		}
 	}
 
+	async findAppointmentById(id: string): Promise<Appointment> {
+		const appointment = await this.prisma.appointment.findUnique({
+			where: { id },
+			include: {
+				business: {
+					select: {
+						fullName: true,
+						email: true,
+						phoneNumber: true,
+					},
+				},
+			},
+		});
+
+		if (!appointment) {
+			throw new NotFoundException('Appointment not found');
+		}
+
+		return appointment;
+	}
+
 	async delete(id: string): Promise<Appointment> {
 		const appointment = await this.prisma.appointment.findUnique({
 			where: { id },

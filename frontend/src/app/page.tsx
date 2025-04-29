@@ -1,7 +1,12 @@
-import { ClientAppointments } from '@/shared/components/client-appointments';
+import { Wrapper } from '@/shared/ui/wrapper';
+import { Title } from '@/shared/ui/title';
 
 const Home = () => {
-  return <ClientAppointments />;
+  return (
+    <Wrapper>
+      <Title title="Welcome to booking system!"></Title>
+    </Wrapper>
+  );
 };
 
 export default Home;

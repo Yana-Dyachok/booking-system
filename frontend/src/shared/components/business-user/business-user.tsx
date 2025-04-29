@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -16,7 +17,13 @@ import { useCreateAppointment } from '@/shared/hook';
 import { DateTimeField } from '@/shared/ui/input-date-time';
 import styles from './business-user.module.scss';
 
-export const BusinessUser: React.FC<{ id: string }> = ({ id }) => {
+export const BusinessUser: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+
+  if (!id) {
+    throw new Error('ID is missing from route params');
+  }
+
   const {
     control,
     handleSubmit,

@@ -36,7 +36,7 @@ export const ClientAppointmentsItem: React.FC<ClientAppointmentsProps> = ({
         </li>
       </ul>
       <div className={styles.buttons}>
-        <Link href="/" className={styles.edit}>
+        <Link href={`/appointments/${data.id}`} className={styles.edit}>
           <EditSVG />
         </Link>
         <DeleteAppointmentButton id={data.id} />

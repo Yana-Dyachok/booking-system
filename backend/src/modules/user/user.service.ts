@@ -39,6 +39,7 @@ export class UserService {
 			where: { id },
 		});
 	}
+
 	async findAllBusinessUsers(
 		query: QueryDto,
 	): Promise<{ items: IBusinessUserPreview[]; total: number }> {

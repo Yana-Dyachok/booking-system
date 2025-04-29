@@ -22,7 +22,17 @@ export const Header = () => {
         <nav>
           <ul className={styles.navList}>
             <li>
-              {' '}
+              {role === Role.CLIENT && (
+                <LinkNav
+                  href="/appointments"
+                  activeClassName={styles.active}
+                  className={styles.link}
+                >
+                  Appointments
+                </LinkNav>
+              )}
+            </li>
+            <li>
               {role === Role.CLIENT && (
                 <LinkNav
                   href="/business"

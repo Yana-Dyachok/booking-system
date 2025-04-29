@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import { ILoginResponse, ILoginData } from '@/shared/types/auth.types';
+import { Role } from '@/shared/types';
 import { Button } from '@/shared/ui/button/button.component';
 import { schemaLogin } from '@/utils/validation-schema.utils';
 import { Input } from '@/shared/ui/input';
@@ -16,6 +17,7 @@ import { Loader } from '@/shared/ui/loader/loader.component';
 import { Title } from '@/shared/ui/title/title.component';
 import { AskQuestion } from '@/shared/ui/ask-question/ask-question.component';
 import { Wrapper } from '@/shared/ui/wrapper/wrapper.component';
+import { getUserRole } from '@/utils';
 import styles from './login-form.module.scss';
 
 export const LoginForm: React.FC = () => {
@@ -44,7 +46,8 @@ export const LoginForm: React.FC = () => {
     onSuccess: (data): void => {
       setAuthToken(data.accessToken);
       setRefreshToken(data.refreshToken);
-      setRole(data.role);
+      const role = getUserRole(data.accessToken);
+      setRole(role as Role);
       router.push('./');
     },
     onError: (error: AxiosError<{ message?: string }>): void => {

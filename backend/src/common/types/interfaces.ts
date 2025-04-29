@@ -18,7 +18,6 @@ export interface ILoginDTO {
 export interface ILoginResponse {
 	accessToken: string;
 	refreshToken: string;
-	role: Role;
 }
 
 export interface IConfig {
