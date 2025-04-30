@@ -12,19 +12,19 @@ import styles from './business.module.scss';
 
 export const BusinessComponents: React.FC = () => {
   const [data, setData] = useState<IBusinessUsersResponse | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
+      setIsLoading(true);
       try {
         const response = await getUsersByRoleApi({ page, limit: 5 });
         setData(response);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -38,32 +38,32 @@ export const BusinessComponents: React.FC = () => {
   const dataUsers: IBusinessUserPreview[] = data?.items || [];
   const totalItems: number = data?.total || 0;
 
-  if (loading) {
-    return <Loader />;
-  }
-
   return (
     <Wrapper>
-      <div className={styles.wrapper}>
-        <Title title="Business users" />
-        {+totalItems > 0 ? (
-          <div className={styles.blockInner}>
-            <div className={styles.usersBlock}>
-              {dataUsers.map((item, index) => (
-                <BusinessItem data={item} key={index + item.id} />
-              ))}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={styles.wrapper}>
+          <Title title="Business users" />
+          {+totalItems > 0 ? (
+            <div className={styles.blockInner}>
+              <div className={styles.usersBlock}>
+                {dataUsers.map((item, index) => (
+                  <BusinessItem data={item} key={index + item.id} />
+                ))}
+              </div>
+              <Pagination
+                className={styles.pagination}
+                count={Math.ceil(+totalItems / 5)}
+                page={page}
+                onChange={handleChange}
+              />
             </div>
-            <Pagination
-              className={styles.pagination}
-              count={Math.ceil(+totalItems / 5)}
-              page={page}
-              onChange={handleChange}
-            />
-          </div>
-        ) : (
-          <h2 className={styles.titles}>There are no users</h2>
-        )}
-      </div>
+          ) : (
+            <h2 className={styles.titles}>There are no users</h2>
+          )}
+        </div>
+      )}
     </Wrapper>
   );
 };

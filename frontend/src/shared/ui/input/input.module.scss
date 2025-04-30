@@ -11,7 +11,7 @@
 .inputText {
   width: 100%;
   padding: 1rem;
-  border-width: 0.1rem;
+  border: solid 0.1rem colors.$c-blue-800;
   border-radius: 1rem;
   background-color: colors.$c-blue-800;
 }
