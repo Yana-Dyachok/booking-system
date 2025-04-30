@@ -3,7 +3,7 @@ import { logoutUserApi } from '@/api/auth.api';
 import { LogOutSvg } from '@/shared/assets/svg/logout.svg';
 import styles from './log-out.module.scss';
 
-export const LogOutButton: React.FC = () => {
+export const LogOutButton: React.FC<{ flag: boolean }> = ({ flag }) => {
   const handleLogout = async (): Promise<void> => {
     try {
       await logoutUserApi();
@@ -14,7 +14,7 @@ export const LogOutButton: React.FC = () => {
 
   return (
     <button type="button" onClick={handleLogout} className={styles.logOut}>
-      <LogOutSvg />
+      {flag ? 'Log out' : <LogOutSvg />}
     </button>
   );
 };

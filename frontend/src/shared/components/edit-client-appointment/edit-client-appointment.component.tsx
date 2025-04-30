@@ -74,57 +74,59 @@ export const EditAppointments: React.FC = () => {
     updateAppointment(data);
   };
 
-  if (isLoading) return <Loader />;
-
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Wrapper>
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
-          <div>
-            <div className={styles.header}>
-              <BackButton /> <Title title="Edit Appointment Date" />
-            </div>
-            <p className={styles.titles}>
-              Business name: {appointment?.business.fullName}
-            </p>
-            <div className={styles.inputsContainer}>
-              <DateTimeField
-                name="date"
-                control={control}
-                label="Date"
-                type="date"
-              />
-              <DateTimeField
-                name="startTime"
-                control={control}
-                label="Start time"
-                type="time"
-              />
-              <DateTimeField
-                name="endTime"
-                control={control}
-                label="End time"
-                type="time"
-              />
-            </div>
-
-            {errors['' as keyof typeof errors]?.message && (
-              <p className={styles.error}>
-                {errors['' as keyof typeof errors]?.message}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
+            <div>
+              <div className={styles.header}>
+                <BackButton /> <Title title="Edit Appointment Date" />
+              </div>
+              <p className={styles.titles}>
+                Business name: {appointment?.business.fullName}
               </p>
-            )}
-          </div>
+              <div className={styles.inputsContainer}>
+                <DateTimeField
+                  name="date"
+                  control={control}
+                  label="Date"
+                  type="date"
+                />
+                <DateTimeField
+                  name="startTime"
+                  control={control}
+                  label="Start time"
+                  type="time"
+                />
+                <DateTimeField
+                  name="endTime"
+                  control={control}
+                  label="End time"
+                  type="time"
+                />
+              </div>
 
-          <div className={styles.buttonBlock}>
-            <Button
-              btnType="submit"
-              color="light"
-              disabled={!isValid || isPending}
-            >
-              {isPending ? <Loader /> : 'Save'}
-            </Button>
-          </div>
-        </form>
+              {errors['' as keyof typeof errors]?.message && (
+                <p className={styles.error}>
+                  {errors['' as keyof typeof errors]?.message}
+                </p>
+              )}
+            </div>
+
+            <div className={styles.buttonBlock}>
+              <Button
+                btnType="submit"
+                color="light"
+                disabled={!isValid || isPending}
+              >
+                {isPending ? <Loader /> : 'Save'}
+              </Button>
+            </div>
+          </form>
+        )}
       </Wrapper>
     </LocalizationProvider>
   );

@@ -68,34 +68,36 @@ export const EditProfileComponent: React.FC = () => {
   return (
     <Wrapper>
       <form className={styles.editForm} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.header}>
-          <BackButton /> <Title title="Edit personal information"></Title>
-        </div>
+        <div>
+          <div className={styles.header}>
+            <BackButton /> <Title title="Edit personal information"></Title>
+          </div>
 
-        <Input
-          control={control}
-          name="email"
-          label="Email"
-          defaultValue={currentValues.email}
-        />
-        <Input
-          control={control}
-          name="fullName"
-          label={role === Role.CLIENT ? 'Full name' : 'Business name'}
-          defaultValue={currentValues.fullName}
-        />
-        <Input
-          control={control}
-          name="phoneNumber"
-          label="Phone number"
-          defaultValue={currentValues.phoneNumber}
-        />
-        <Input
-          control={control}
-          name="shippingAddress"
-          label="Shipping address"
-          defaultValue={currentValues.shippingAddress}
-        />
+          <Input
+            control={control}
+            name="email"
+            label="Email"
+            defaultValue={currentValues.email}
+          />
+          <Input
+            control={control}
+            name="fullName"
+            label={role === Role.CLIENT ? 'Full name' : 'Business name'}
+            defaultValue={currentValues.fullName}
+          />
+          <Input
+            control={control}
+            name="phoneNumber"
+            label="Phone number"
+            defaultValue={currentValues.phoneNumber}
+          />
+          <Input
+            control={control}
+            name="shippingAddress"
+            label="Shipping address"
+            defaultValue={currentValues.shippingAddress}
+          />
+        </div>
         <Button btnType="submit" color="dark" disabled={!isDirty || !isValid}>
           {isLoading ? <Loader /> : 'Save'}
         </Button>

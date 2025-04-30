@@ -66,29 +66,31 @@ export const ChangePasswordComponent: React.FC = () => {
   return (
     <Wrapper>
       <form className={styles.changeForm} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.header}>
-          <BackButton /> <Title title="Change password"></Title>
+        <div>
+          <div className={styles.header}>
+            <BackButton /> <Title title="Change password"></Title>
+          </div>
+          <Input
+            control={control}
+            name="currentPassword"
+            label="Current Password"
+            defaultValue=""
+          />
+          <Input
+            control={control}
+            name="newPassword"
+            label="New Password"
+            defaultValue=""
+            toggleShowPassword={true}
+          />
+          <Input
+            control={control}
+            name="confirmPassword"
+            label="Confirm Password"
+            defaultValue=""
+            toggleShowPassword={true}
+          />
         </div>
-        <Input
-          control={control}
-          name="currentPassword"
-          label="Current Password"
-          defaultValue=""
-        />
-        <Input
-          control={control}
-          name="newPassword"
-          label="New Password"
-          defaultValue=""
-          toggleShowPassword={true}
-        />
-        <Input
-          control={control}
-          name="confirmPassword"
-          label="Confirm Password"
-          defaultValue=""
-          toggleShowPassword={true}
-        />
         <Button btnType="submit" color="dark" disabled={!isDirty || !isValid}>
           {isPending ? <Loader /> : 'Save'}
         </Button>

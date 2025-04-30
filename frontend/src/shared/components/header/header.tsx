@@ -80,8 +80,8 @@ export const Header = () => {
                 {isMenuOpen ? 'Profile' : <ProfileSvg />}
               </LinkNav>
             </li>
-            <li className={styles.link} onClick={() => setIsMenuOpen(false)}>
-              {isMenuOpen ? 'Log out' : <LogOutButton />}
+            <li onClick={() => setIsMenuOpen(false)}>
+              <LogOutButton flag={isMenuOpen} />
             </li>
           </ul>
         </nav>
