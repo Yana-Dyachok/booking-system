@@ -4,6 +4,7 @@
   "description": "Develop a user management system with client and business roles. Clients can view businesses and book/manage appointments (date, time, duration).",
   "main": "index.js",
   "scripts": {
+    "build": "cd backend && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky",
     "lint": "npm run lint-backend && npm run lint-frontend",
