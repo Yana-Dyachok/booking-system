@@ -1,46 +1,33 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Pagination from '@mui/material/Pagination';
 import { Loader } from '@/shared/ui/loader';
 import { Title } from '@/shared/ui/title';
-import { IAppointmentResponse, IAllAppointmentResponse } from '@/shared/types';
+import { IAllAppointmentResponse, IAppointmentResponse } from '@/shared/types';
 import { getClientAppointmentsApi } from '@/api/appointment.api';
 import { ClientAppointmentsItem } from './client-appointments-item.component';
+import { usePaginatedFetch } from '@/shared/hook';
 import { Wrapper } from '@/shared/ui/wrapper';
 import styles from '../business/business.module.scss';
 
 export const ClientAppointments: React.FC = () => {
-  const [data, setData] = useState<IAllAppointmentResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const { data, isLoading, page, setPage, setData } = usePaginatedFetch<
+    IAppointmentResponse,
+    IAllAppointmentResponse
+  >({
+    fetchFunction: getClientAppointmentsApi,
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await getClientAppointmentsApi({ page, limit: 5 });
-        setData(response);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [page]);
+  const dataUsers = data?.items || [];
+  const totalItems = data?.total || 0;
 
   const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
-  const dataUsers: IAppointmentResponse[] = data?.items || [];
-  const totalItems: number = data?.total || 0;
-
   return (
     <Wrapper>
-      {' '}
       {isLoading ? (
         <Loader />
       ) : (

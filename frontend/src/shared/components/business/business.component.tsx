@@ -1,42 +1,30 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Pagination from '@mui/material/Pagination';
 import { Loader } from '@/shared/ui/loader';
 import { Title } from '@/shared/ui/title';
-import { IBusinessUsersResponse, IBusinessUserPreview } from '@/shared/types';
+import { IBusinessUserPreview, IBusinessUsersResponse } from '@/shared/types';
 import { getUsersByRoleApi } from '@/api/user.api';
 import { BusinessItem } from './business-item';
 import { Wrapper } from '@/shared/ui/wrapper';
+import { usePaginatedFetch } from '@/shared/hook';
 import styles from './business.module.scss';
 
 export const BusinessComponents: React.FC = () => {
-  const [data, setData] = useState<IBusinessUsersResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const { data, isLoading, page, setPage } = usePaginatedFetch<
+    IBusinessUserPreview,
+    IBusinessUsersResponse
+  >({
+    fetchFunction: getUsersByRoleApi,
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await getUsersByRoleApi({ page, limit: 5 });
-        setData(response);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [page]);
+  const dataUsers = data?.items || [];
+  const totalItems = data?.total || 0;
 
   const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
-
-  const dataUsers: IBusinessUserPreview[] = data?.items || [];
-  const totalItems: number = data?.total || 0;
 
   return (
     <Wrapper>
