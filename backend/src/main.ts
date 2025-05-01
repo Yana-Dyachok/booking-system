@@ -9,7 +9,11 @@ async function bootstrap() {
 	const rawOrigin = configService.get<string>('config.frontendUrl');
 	const port = configService.get<number>('config.port') ?? 4000;
 	app.enableCors({
-		origin: rawOrigin,
+		origin: [
+			rawOrigin,
+			'https://booking-system-frontend-amber.vercel.app',
+			'http://localhost:3000',
+		],
 		allowedHeaders: ['Content-Type', 'Authorization'],
 		methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
 		credentials: true,
