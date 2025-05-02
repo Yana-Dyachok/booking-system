@@ -24,7 +24,8 @@ export class AppointmentService {
 		const [year, month, day] = dto.date.split('-').map(Number);
 		const [hour, minute] = dto.time.split(':').map(Number);
 
-		const startDate = new Date(year, month - 1, day, hour, minute);
+		// const startDate = new Date(year, month - 1, day, hour, minute);  // for local DB
+		const startDate = new Date(year, month - 1, day, hour - 3, minute); //temporary for  Railway deploy (with UTC+0)
 
 		if (isNaN(startDate.getTime())) {
 			throw new BadRequestException('Invalid date or time format');
@@ -161,7 +162,8 @@ export class AppointmentService {
 		const [year, month, day] = date.split('-').map(Number);
 		const [hour, minute] = time.split(':').map(Number);
 
-		const startDate = new Date(year, month - 1, day, hour, minute);
+		// const startDate = new Date(year, month - 1, day, hour, minute);  // for local DB
+		const startDate = new Date(year, month - 1, day, hour - 3, minute); //temporary for  Railway deploy (with UTC+0)
 		const endDate = new Date(startDate.getTime() + durationMin * 60 * 1000);
 
 		const overlapping = await this.prisma.appointment.findFirst({
