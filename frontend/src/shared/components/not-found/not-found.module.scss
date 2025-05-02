@@ -1,12 +1,11 @@
 @use '../../styles/colors.scss' as colors;
 
 .errorBlock {
-  height: 90vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
   overflow-x: hidden;
   gap: 2rem;
 }
@@ -15,7 +14,7 @@
   text-align: center;
   font-family: 'oswald';
   font-weight: 500;
-  margin: 2rem;
+  padding: 2rem;
 }
 
 .title {

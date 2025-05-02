@@ -20,13 +20,21 @@ export class AppointmentService {
 		if (!dto.date || !dto.time) {
 			throw new BadRequestException('Date and time must be provided');
 		}
-		const startDate = new Date(`${dto.date}T${dto.time}:00`);
+
+		const [year, month, day] = dto.date.split('-').map(Number);
+		const [hour, minute] = dto.time.split(':').map(Number);
+
+		const startDate = new Date(
+			Date.UTC(year, month - 1, day, hour, minute),
+		);
 		if (isNaN(startDate.getTime())) {
 			throw new BadRequestException('Invalid date or time format');
 		}
+
 		const endDate = new Date(
 			startDate.getTime() + dto.durationMin * 60 * 1000,
 		);
+
 		const business = await this.prisma.user.findUnique({
 			where: { id: dto.businessId },
 		});
@@ -34,6 +42,7 @@ export class AppointmentService {
 		if (!business) {
 			throw new NotFoundException('Business with this ID not found');
 		}
+
 		const overlapping = await this.prisma.appointment.findFirst({
 			where: {
 				businessId: dto.businessId,
@@ -49,6 +58,7 @@ export class AppointmentService {
 				'Appointment already exists for this business at the specified time',
 			);
 		}
+
 		const appointment = await this.prisma.appointment.create({
 			data: {
 				businessId: dto.businessId,
@@ -149,8 +159,14 @@ export class AppointmentService {
 			appointment.date.toISOString().split('T')[1].slice(0, 5);
 		const durationMin = dto.durationMin ?? appointment.durationMin;
 
-		const startDate = new Date(`${date}T${time}:00`);
+		const [year, month, day] = date.split('-').map(Number);
+		const [hour, minute] = time.split(':').map(Number);
+
+		const startDate = new Date(
+			Date.UTC(year, month - 1, day, hour, minute),
+		);
 		const endDate = new Date(startDate.getTime() + durationMin * 60 * 1000);
+
 		const overlapping = await this.prisma.appointment.findFirst({
 			where: {
 				businessId: appointment.businessId,
