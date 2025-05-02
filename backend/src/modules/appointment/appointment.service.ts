@@ -100,7 +100,7 @@ export class AppointmentService {
 
 			console.log('Items count:', items.length);
 			console.log('Total count:', total);
-
+			
 			return { items, total };
 		} catch (error) {
 			console.error('Error fetching client appointments:', error);
