@@ -15,10 +15,10 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { User, Role } from '../../../prisma/prisma/generated/client';
 import { IBusinessUserPreview } from '@/common/types';
-// import { AtGuard } from '../auth';
+import { AtGuard } from '../auth';
 import { QueryDto } from '../appointment/dto/query-appointment';
 
-// @UseGuards(AtGuard)
+@UseGuards(AtGuard)
 @Controller('user')
 export class UserController {
 	constructor(private readonly userService: UserService) {}

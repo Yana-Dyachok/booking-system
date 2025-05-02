@@ -1,9 +1,10 @@
 export const formatTime = (dateInput: string | Date): string => {
-  const createdAtDate =
-    typeof dateInput === 'string' ? new Date(dateInput) : dateInput;
+  const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput;
 
-  const hours = String(createdAtDate.getHours()).padStart(2, '0');
-  const minutes = String(createdAtDate.getMinutes()).padStart(2, '0');
-
-  return `${hours}:${minutes}`;
+  return date.toLocaleTimeString('uk-UA', {
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'Europe/Kyiv',
+    hour12: false,
+  });
 };
