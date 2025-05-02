@@ -25,7 +25,7 @@ export class AuthService {
 		this.jwtSecret =
 			this.configService.get<string>('JWT_SECRET_KEY') ??
 			'default-secret-key';
-			console.log('JWT_SECRET_KEY:', this.jwtSecret); 
+		console.log('JWT_SECRET_KEY:', this.jwtSecret);
 	}
 
 	async register(dto: RegisterUserDto): Promise<User> {
