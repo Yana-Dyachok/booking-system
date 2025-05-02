@@ -79,3 +79,11 @@ Database: PostgreSQL, MongoDB, MySQL
 - 2 types of users: client and business
 - Clients should be able to view a list of business users and make appointments with them. Date, time and duration. 
 - Clients should also have the ability to see and manage their own appointments (cancel or reschedule them).
+
+![as](https://github.com/user-attachments/assets/5dbe7df3-4206-4103-9846-f261ee0d1ebf)
+![gh](https://github.com/user-attachments/assets/ad62bdc7-3741-4dda-9077-b6b2f9559a37)
+
+
+
+
+
