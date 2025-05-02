@@ -17,6 +17,7 @@ import { AppointmentModule } from '@/modules/appointment';
 		AppointmentModule,
 		ConfigModule.forRoot({
 			load: [envConfig],
+			isGlobal: true,
 			envFilePath: resolve(process.cwd(), '.env'),
 		}),
 	],
