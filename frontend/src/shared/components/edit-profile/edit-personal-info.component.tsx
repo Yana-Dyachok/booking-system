@@ -51,7 +51,7 @@ export const EditProfileComponent: React.FC = () => {
     }
   }, [user, reset]);
 
-  const onSubmit = async (data: IPersonalInfoData) => {
+  const onSubmit = async (data: IPersonalInfoData): Promise<void> => {
     try {
       const payload: Partial<ICreateUser> = {
         ...data,
@@ -63,8 +63,8 @@ export const EditProfileComponent: React.FC = () => {
     }
   };
 
-  const currentValues = getValues();
-  const role = useAuthStore.getState().role;
+  const currentValues: IPersonalInfoData = getValues();
+  const role: Role | null = useAuthStore.getState().role;
   return (
     <Wrapper>
       <form className={styles.editForm} onSubmit={handleSubmit(onSubmit)}>

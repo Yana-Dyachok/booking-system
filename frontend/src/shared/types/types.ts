@@ -1,20 +1,3 @@
-export interface IHttpConfig {
-  url?: string;
-  headers?: Record<string, string>;
-  params?: unknown;
-  data?: unknown;
-}
-
-export type IMap = Record<string, unknown>;
-
-export interface IHttpClient {
-  get: <T>(url: string, config?: IHttpConfig) => Promise<T>;
-  post: <T, TD>(url: string, data: TD, config?: IHttpConfig) => Promise<T>;
-  put: <T, TD>(url: string, data: TD, config?: IHttpConfig) => Promise<T>;
-  delete: <T>(url: string, config?: IHttpConfig) => Promise<T>;
-  patch: <T, TD>(url: string, data: TD, config?: IHttpConfig) => Promise<T>;
-}
-
 export enum HttpStatusCode {
   CONTINUE = 100,
 
@@ -137,23 +120,6 @@ export enum HttpStatusCode {
   NOT_EXTENDED = 510,
 
   NETWORK_AUTHENTICATION_REQUIRED = 511,
-}
-
-export interface IResponse<T = object | Array<object>> {
-  status: HttpStatusCode;
-  data: T;
-}
-
-export interface IServerError {
-  error: string;
-  message: string;
-  statusCode: number;
-}
-
-export interface PaginatedResponse<T> {
-  data: Array<T>;
-  total_pages: number;
-  total_results: number;
 }
 
 export const enum PATH_KEYS {

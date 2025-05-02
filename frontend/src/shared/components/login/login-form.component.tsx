@@ -59,7 +59,7 @@ export const LoginForm: React.FC = () => {
     },
   });
 
-  const isLoading = status === 'pending';
+  const isLoading: boolean = status === 'pending';
 
   const onSubmit = (data: ILoginData): void => {
     mutate(data);

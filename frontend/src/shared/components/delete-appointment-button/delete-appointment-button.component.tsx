@@ -18,15 +18,15 @@ export const DeleteAppointmentButton: React.FC<AppointmentDataProps> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
+  const openModal = (): void => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setIsModalOpen(false);
   };
 
-  const handleDeleteConfirm = async () => {
+  const handleDeleteConfirm = async (): Promise<void> => {
     try {
       await deleteAppointmentApi(id);
       toast.success('Appointment deleted');

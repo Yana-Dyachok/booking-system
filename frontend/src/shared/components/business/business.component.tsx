@@ -22,7 +22,10 @@ export const BusinessComponents: React.FC = () => {
   const dataUsers = data?.items || [];
   const totalItems = data?.total || 0;
 
-  const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (
+    _event: React.ChangeEvent<unknown>,
+    value: number,
+  ): void => {
     setPage(value);
   };
 

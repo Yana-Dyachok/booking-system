@@ -13,7 +13,7 @@ export const Header = () => {
   const role = useAuthStore.getState().role;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
+  const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
   };
   return (

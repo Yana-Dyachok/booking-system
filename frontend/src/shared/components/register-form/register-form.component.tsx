@@ -55,7 +55,7 @@ export const RegisterForm: React.FC = () => {
     },
   });
 
-  const onSubmit = (data: IRegisterData) => {
+  const onSubmit = (data: IRegisterData): void => {
     registerUser(data);
   };
 

@@ -39,7 +39,7 @@ export const BusinessUser: React.FC = () => {
 
   const { mutate: createAppointment, isPending } = useCreateAppointment(id);
 
-  const onSubmit = (data: IAppointmentInput) => {
+  const onSubmit = (data: IAppointmentInput): void => {
     createAppointment(data);
   };
 

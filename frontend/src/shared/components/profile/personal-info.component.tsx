@@ -9,9 +9,9 @@ import styles from './profile.module.scss';
 
 export const PersonalInfo: React.FC = () => {
   const [data, setData] = useState<IRegisterResponse | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const role = useAuthStore((state) => state.role);
+  const role: Role | null = useAuthStore((state) => state.role);
 
   useEffect(() => {
     getUserByIdApi()

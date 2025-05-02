@@ -59,7 +59,7 @@ export const ChangePasswordComponent: React.FC = () => {
     },
   });
 
-  const onSubmit = (data: IVallidPassword) => {
+  const onSubmit = (data: IVallidPassword): void => {
     mutate(data);
   };
 

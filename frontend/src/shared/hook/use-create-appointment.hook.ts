@@ -36,10 +36,10 @@ export const useCreateAppointment = (businessId: string) => {
       };
       return await createAppointmentApi(appointment);
     },
-    onSuccess: () => {
+    onSuccess: (): void => {
       toast.success('Appointment created!');
     },
-    onError: (error) => {
+    onError: (error): void => {
       const axiosError = error as AxiosError<{ message: string }>;
       toast.error(axiosError.response?.data.message || 'Something went wrong.');
     },

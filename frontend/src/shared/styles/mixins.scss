@@ -33,14 +33,6 @@
   }
 }
 
-@mixin hoverFocus() {
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      @content;
-    }
-  }
-}
-
 @mixin inputBox($r) {
   width: 2rem;
   height: 2rem;

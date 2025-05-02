@@ -19,10 +19,13 @@ export const ClientAppointments: React.FC = () => {
     fetchFunction: getClientAppointmentsApi,
   });
 
-  const dataUsers = data?.items || [];
-  const totalItems = data?.total || 0;
+  const dataUsers: IAppointmentResponse[] = data?.items || [];
+  const totalItems: number = data?.total || 0;
 
-  const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (
+    _event: React.ChangeEvent<unknown>,
+    value: number,
+  ): void => {
     setPage(value);
   };
 

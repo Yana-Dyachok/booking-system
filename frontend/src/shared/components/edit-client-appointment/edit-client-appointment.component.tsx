@@ -70,7 +70,7 @@ export const EditAppointments: React.FC = () => {
 
   const { mutate: updateAppointment, isPending } = useUpdateAppointment(id);
 
-  const onSubmit = (data: IAppointmentInput) => {
+  const onSubmit = (data: IAppointmentInput): void => {
     updateAppointment(data);
   };
 

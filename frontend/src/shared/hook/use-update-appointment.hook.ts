@@ -14,7 +14,7 @@ import {
 const calculateDuration = (
   start: dayjs.Dayjs | null,
   end: dayjs.Dayjs | null,
-) => {
+): number => {
   if (start && end) {
     const diffInMinutes = end.diff(start, 'minute');
     return diffInMinutes > 0 ? diffInMinutes : 0;
@@ -35,10 +35,10 @@ export const useUpdateAppointment = (id: string) => {
       };
       return await updateAppointmentApi(id, appointment);
     },
-    onSuccess: () => {
+    onSuccess: (): void => {
       toast.success('Appointment updated!');
     },
-    onError: (error) => {
+    onError: (error): void => {
       const axiosError = error as AxiosError<{ message: string }>;
       toast.error(axiosError.response?.data.message || 'Something went wrong.');
     },

@@ -17,7 +17,7 @@ export function usePaginatedFetch<T, N extends { items: T[]; total: number }>({
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (): Promise<void> => {
       setIsLoading(true);
       try {
         const response = await fetchFunction({ page, limit });
