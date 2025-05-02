@@ -1,5 +1,7 @@
 # Booking System
 Develop a user management system with client and business roles. Clients can view businesses and book/manage appointments (date, time, duration).
+- [Frontend deploy](https://booking-system-frontend-amber.vercel.app)
+- [Backend deploy](https://booking-api-diachok.up.railway.app)
 
 ### How to install
 
@@ -42,24 +44,28 @@ npm run start
 ```
 
 ## The technology stack used:
-   - TypeScript
-   - React, React Suspense
-   - Next.js
-   - Nest.js, Node.js
-   - PostgreSQL
-   - Eslint, Prettier, Husky
-   - SASS
-   
-
+- TypeScript
+- React, React Hook Form, Next.js
+- Nest.js, Node.js
+- Prisma, PostgreSQL
+- MUI (Material UI), MUI X Date, Time Pickers
+- @tanstack/react-query, Axios, Zustand, Yup
+- SASS, Styled component
+- Eslint, Prettier, Husky
 
 ## Scripts
  Scripts                  |   instructions                         | Comands
 --------------------------|:---------------------------------------|:-----------------------------
-ESLint                    | check:                                 | npm run lint 
-Husky                     |setting up Git hooks:                   |npm run prepare
+ESLint                    | check lint errors:                     | npm run lint 
+Husky                     | setting up Git hooks:                  | npm run prepare
 Next                      | compiles files and builds the app:     | npm run build 
 //                        | create a local server for development: | npm run dev 
 Prettier                  | checks and formats files:              | npm run format
+Nest                      | compiles files and builds the app:     | npm run build
+//                        | create a local server for development: | npm run start
+Prisma                    | deploying created migrations:          | npm run migrate:deploy
+Prisma                    | generated Prisma Client for db:        | npm run prisma:gen
+
 
 
 ### Task:
