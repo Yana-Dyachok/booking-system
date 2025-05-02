@@ -5,7 +5,7 @@ import { PATH_KEYS, HttpStatusCode, Role } from '@/shared/types/types';
 import { getUserRole } from '@/utils';
 
 const api = axios.create({
-  baseURL: BASE_URL ?? 'http://localhost:4000',
+  baseURL: BASE_URL,
   withCredentials: true,
 });
 
