@@ -8,6 +8,7 @@ import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 import { QueryDto } from './dto/query-appointment';
 import { Appointment } from 'prisma/prisma/generated/client';
+import { convertUtcToKyivTime } from '@/common/utils/convert-time.utils';
 
 @Injectable()
 export class AppointmentService {
@@ -71,6 +72,64 @@ export class AppointmentService {
 		return appointment;
 	}
 
+	// async findClientAppointments(
+	// 	clientId: string,
+	// 	query: QueryDto,
+	// ): Promise<{ items: Appointment[]; total: number }> {
+	// 	const { page = 1, limit = 10 } = query;
+	// 	const skip = (Number(page) - 1) * Number(limit);
+	// 	const take = Number(limit);
+
+	// 	try {
+	// 		const [items, total] = await this.prisma.$transaction([
+	// 			this.prisma.appointment.findMany({
+	// 				where: { clientId },
+	// 				skip,
+	// 				take,
+	// 				include: {
+	// 					business: {
+	// 						select: {
+	// 							fullName: true,
+	// 							email: true,
+	// 							phoneNumber: true,
+	// 						},
+	// 					},
+	// 				},
+	// 			}),
+	// 			this.prisma.appointment.count({ where: { clientId } }),
+	// 		]);
+
+	// 		console.log('Items count:', items.length);
+	// 		console.log('Total count:', total);
+
+	// 		return { items, total };
+	// 	} catch (error) {
+	// 		console.error('Error fetching client appointments:', error);
+	// 		throw error;
+	// 	}
+	// }
+
+	// async findAppointmentById(id: string): Promise<Appointment> {
+	// 	const appointment = await this.prisma.appointment.findUnique({
+	// 		where: { id },
+	// 		include: {
+	// 			business: {
+	// 				select: {
+	// 					fullName: true,
+	// 					email: true,
+	// 					phoneNumber: true,
+	// 				},
+	// 			},
+	// 		},
+	// 	});
+
+	// 	if (!appointment) {
+	// 		throw new NotFoundException('Appointment not found');
+	// 	}
+
+	// 	return appointment;
+	// }
+
 	async findClientAppointments(
 		clientId: string,
 		query: QueryDto,
@@ -100,8 +159,16 @@ export class AppointmentService {
 
 			console.log('Items count:', items.length);
 			console.log('Total count:', total);
+			const convertedItems = items.map((appointment) => {
+				const convertedDate = convertUtcToKyivTime(appointment.date);
+				console.log('date-all', convertedDate);
+				return {
+					...appointment,
+					date: new Date(convertedDate.date),
+				};
+			});
 
-			return { items, total };
+			return { items: convertedItems, total };
 		} catch (error) {
 			console.error('Error fetching client appointments:', error);
 			throw error;
@@ -126,7 +193,12 @@ export class AppointmentService {
 			throw new NotFoundException('Appointment not found');
 		}
 
-		return appointment;
+		const convertedDate = convertUtcToKyivTime(appointment.date);
+		console.log('date-id', convertedDate);
+		return {
+			...appointment,
+			date: new Date(convertedDate.date),
+		};
 	}
 
 	async delete(id: string): Promise<Appointment> {
