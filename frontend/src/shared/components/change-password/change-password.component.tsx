@@ -8,13 +8,13 @@ import { useMutation } from '@tanstack/react-query';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { schemaChangePassword } from '@/utils';
-import { IVallidPassword } from '@/shared/types';
+import { IVallidPassword, HttpStatusCode } from '@/shared/types';
 import { Loader } from '@/shared/ui/loader';
 import { changePasswordApi } from '@/api/user.api';
 import { Wrapper } from '@/shared/ui/wrapper';
 import { Title } from '@/shared/ui/title';
 import { BackButton } from '@/shared/ui/back-button/back-button';
-import { HttpStatusCode } from '@/shared/types';
+import { useCooldownCallback } from '@/shared/hook';
 import styles from './change-password.module.scss';
 
 export const ChangePasswordComponent: React.FC = () => {
@@ -63,9 +63,11 @@ export const ChangePasswordComponent: React.FC = () => {
     mutate(data);
   };
 
+  const cooledSubmit = useCooldownCallback(onSubmit, 6000);
+
   return (
     <Wrapper>
-      <form className={styles.changeForm} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.changeForm} onSubmit={handleSubmit(cooledSubmit)}>
         <div>
           <div className={styles.header}>
             <BackButton /> <Title title="Change password"></Title>

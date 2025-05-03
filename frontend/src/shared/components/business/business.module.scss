@@ -6,6 +6,7 @@
   max-width: 122rem;
   flex-direction: column;
   gap: 2rem;
+  padding-top: 2rem;
 }
 
 .edit:hover {
@@ -43,6 +44,10 @@
 
 .item {
   padding-bottom: 1rem;
+}
+
+.pastDate {
+  color: colors.$c-red;
 }
 
 .button {

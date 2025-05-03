@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import { getAppointmentByIdApi } from '@/api/appointment.api';
 import { IAppointmentInput } from '@/shared/types';
 import { schemaMakeAppointment } from '@/utils';
-import { useUpdateAppointment } from '@/shared/hook';
+import { useUpdateAppointment, useCooldownCallback } from '@/shared/hook';
 
 import { Wrapper } from '@/shared/ui/wrapper';
 import { Title } from '@/shared/ui/title';
@@ -36,7 +36,7 @@ export const EditAppointments: React.FC = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isDirty, isValid },
     reset,
     trigger,
   } = useForm<IAppointmentInput>({
@@ -74,13 +74,18 @@ export const EditAppointments: React.FC = () => {
     updateAppointment(data);
   };
 
+  const cooledSubmit = useCooldownCallback(onSubmit, 6000);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Wrapper>
         {isLoading ? (
           <Loader />
         ) : (
-          <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
+          <form
+            onSubmit={handleSubmit(cooledSubmit)}
+            className={styles.wrapper}
+          >
             <div>
               <div className={styles.header}>
                 <BackButton /> <Title title="Edit Appointment Date" />
@@ -120,7 +125,7 @@ export const EditAppointments: React.FC = () => {
               <Button
                 btnType="submit"
                 color="light"
-                disabled={!isValid || isPending}
+                disabled={!isValid || !isDirty || isPending}
               >
                 {isPending ? <Loader /> : 'Save'}
               </Button>

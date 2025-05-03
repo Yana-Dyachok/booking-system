@@ -1,17 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { ReactNode } from 'react';
+import { ButtonProps } from './button.types';
 import style from './button.module.scss';
-
-type ButtonProps = {
-  btnType: 'button' | 'submit';
-  children: string | ReactNode;
-  to?: string;
-  disabled?: boolean;
-  color: 'dark' | 'light';
-  onClick?: () => void;
-};
 
 export const Button = ({
   btnType = 'button',

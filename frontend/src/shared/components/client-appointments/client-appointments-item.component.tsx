@@ -13,6 +13,11 @@ export const ClientAppointmentsItem: React.FC<ClientAppointmentsProps> = ({
   setData,
   page,
 }) => {
+  const appointmentDate = data.date ? new Date(data.date) : null;
+  const now = new Date();
+  const isPast = appointmentDate && appointmentDate < now;
+  const dateClassName = isPast ? styles.pastDate : '';
+
   return (
     <div className={styles.blockItem}>
       <ul>
@@ -22,17 +27,22 @@ export const ClientAppointmentsItem: React.FC<ClientAppointmentsProps> = ({
         </li>
         <li className={styles.item}>
           <span className={styles.titles}>Date:</span>
-          <span>{data.date ? formatDate(data.date) : 'N/A'}</span>
+          <span className={dateClassName}>
+            {data.date ? formatDate(data.date) : 'N/A'}
+          </span>
         </li>
         <li className={styles.item}>
           <span className={styles.titles}>Time:</span>
-          <span>{data.date ? formatTime(data.date) : 'N/A'}</span>
+          <span className={dateClassName}>
+            {data.date ? formatTime(data.date) : 'N/A'}
+          </span>
         </li>
         <li className={styles.item}>
           <span className={styles.titles}>Duration:</span>
           <span>{data.durationMin || 'N/A'} min</span>
         </li>
       </ul>
+
       <div className={styles.buttons}>
         <Link href={`/appointments/${data.id}`} className={styles.edit}>
           <EditSVG />

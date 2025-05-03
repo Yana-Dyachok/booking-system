@@ -1,10 +1,13 @@
 import { Wrapper } from '@/shared/ui/wrapper';
 import { Title } from '@/shared/ui/title';
+import styles from '../shared/components/business/business.module.scss';
 
 const Home = () => {
   return (
     <Wrapper>
-      <Title title="Welcome to Booking System!"></Title>
+      <div className={styles.wrapper}>
+        <Title title="Welcome to Booking System!"></Title>
+      </div>
     </Wrapper>
   );
 };

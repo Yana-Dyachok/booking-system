@@ -24,7 +24,7 @@ export const BusinessItem: React.FC<BusinessUserProps> = ({ data }) => {
       </ul>
       <div className={styles.button}>
         <Button btnType="button" to={`/business/${data.id}`} color="dark">
-          Make Appointments
+          Make Appointment
         </Button>
       </div>
     </div>

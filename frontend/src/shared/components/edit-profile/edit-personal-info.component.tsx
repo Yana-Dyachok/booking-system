@@ -14,6 +14,7 @@ import { Wrapper } from '@/shared/ui/wrapper';
 import { Title } from '@/shared/ui/title';
 import { BackButton } from '@/shared/ui/back-button/back-button';
 import { useAuthStore } from '@/shared/store';
+import { useCooldownCallback } from '@/shared/hook';
 import styles from './edit-profile.module.scss';
 
 export const EditProfileComponent: React.FC = () => {
@@ -63,11 +64,13 @@ export const EditProfileComponent: React.FC = () => {
     }
   };
 
+  const cooledSubmit = useCooldownCallback(onSubmit, 6000);
+
   const currentValues: IPersonalInfoData = getValues();
   const role: Role | null = useAuthStore.getState().role;
   return (
     <Wrapper>
-      <form className={styles.editForm} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.editForm} onSubmit={handleSubmit(cooledSubmit)}>
         <div>
           <div className={styles.header}>
             <BackButton /> <Title title="Edit personal information"></Title>

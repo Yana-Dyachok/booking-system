@@ -23,34 +23,38 @@ export const PersonalInfo: React.FC = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <Loader />;
-
   return (
-    <ul className={styles.list}>
-      <li className={styles.item}>
-        <span className={styles.titles}>
-          {role === Role.CLIENT ? 'Full name' : 'Business name'}:
-        </span>
-        <span>{data?.fullName || 'N/A'}</span>
-      </li>
-      <li className={styles.item}>
-        <span className={styles.titles}>Email:</span>
-        <span>{data?.email || 'N/A'}</span>
-      </li>
-      <li className={styles.item}>
-        <span className={styles.titles}>Phone:</span>
-        <span>{data?.phoneNumber || 'N/A'}</span>
-      </li>
-      <li className={styles.item}>
-        <span className={styles.titles}>Address:</span>
-        <span>{data?.shippingAddress || 'N/A'}</span>
-      </li>
-      {data?.description && (
-        <li className={styles.item}>
-          <span className={styles.titles}>Description:</span>
-          <span>{data.description}</span>
-        </li>
+    <div className={styles.infoBlock}>
+      {loading ? (
+        <Loader />
+      ) : (
+        <ul className={styles.list}>
+          <li className={styles.item}>
+            <span className={styles.titles}>
+              {role === Role.CLIENT ? 'Full name' : 'Business name'}:
+            </span>
+            <span>{data?.fullName || 'N/A'}</span>
+          </li>
+          <li className={styles.item}>
+            <span className={styles.titles}>Email:</span>
+            <span>{data?.email || 'N/A'}</span>
+          </li>
+          <li className={styles.item}>
+            <span className={styles.titles}>Phone:</span>
+            <span>{data?.phoneNumber || 'N/A'}</span>
+          </li>
+          <li className={styles.item}>
+            <span className={styles.titles}>Address:</span>
+            <span>{data?.shippingAddress || 'N/A'}</span>
+          </li>
+          {data?.description && (
+            <li className={styles.item}>
+              <span className={styles.titles}>Description:</span>
+              <span>{data.description}</span>
+            </li>
+          )}
+        </ul>
       )}
-    </ul>
+    </div>
   );
 };

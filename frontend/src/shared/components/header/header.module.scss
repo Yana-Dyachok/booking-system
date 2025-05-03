@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
 }
 
 .navList {
@@ -82,8 +82,8 @@
     align-items: center;
     position: fixed;
     top: 0;
-    right: -320px;
-    width: 320px;
+    right: -100%;
+    width: 100%;
     height: 100%;
     font-size: 1.5rem;
     background-color: colors.$c-blue-800;
