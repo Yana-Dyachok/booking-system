@@ -20,11 +20,18 @@ export default function RootLayoutClient({
   const pathname = usePathname();
   const router = useRouter();
 
-  const authToken = useAuthStore((state) => state.authToken);
+  const { authToken, lastVisitedPage, setLastVisitedPage } = useAuthStore();
+
   const [isAuthChecked, setIsAuthChecked] = useState(false);
 
   const isPublic = publicRoutes.includes(pathname);
   const shouldHideHeaderAndFooter = isPublic;
+
+  useEffect(() => {
+    if (!isPublic && authToken) {
+      setLastVisitedPage(pathname);
+    }
+  }, [pathname, isPublic, authToken, setLastVisitedPage]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -32,11 +39,12 @@ export default function RootLayoutClient({
     if (!authToken && !isPublic) {
       router.replace('/login');
     } else if (authToken && isPublic) {
-      router.replace('/');
+      const redirectTo = lastVisitedPage || '/';
+      router.replace(redirectTo);
     } else {
       setIsAuthChecked(true);
     }
-  }, [pathname, authToken, isPublic, router]);
+  }, [pathname, authToken, isPublic, router, lastVisitedPage]);
 
   if (!isAuthChecked && !isPublic) return null;
 

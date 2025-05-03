@@ -95,13 +95,14 @@
     text-align: center;
     font-size: 2rem;
   }
-}
 
-@media (max-width: 480px) {
   .blockItem {
     flex-direction: column;
     gap: 2rem;
   }
+}
+
+@media (max-width: 480px) {
   .pagination {
     :global(.MuiPaginationItem-root) {
       font-size: 1.2rem;
