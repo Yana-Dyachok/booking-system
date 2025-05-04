@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/shared/components/error-boundary/error-boundary';
 import { Toast } from '@/shared/ui/toast/toast.component';
@@ -19,13 +19,13 @@ export default function RootLayoutClient({
 }) {
   const pathname = usePathname();
   const router = useRouter();
-
+  const searchParams = useSearchParams();
   const { authToken, lastVisitedPage, setLastVisitedPage } = useAuthStore();
-
   const [isAuthChecked, setIsAuthChecked] = useState(false);
-
   const isPublic = publicRoutes.includes(pathname);
   const shouldHideHeaderAndFooter = isPublic;
+  const shouldPreservePageParam =
+    pathname.includes('appointment') || pathname.includes('business');
 
   useEffect(() => {
     if (!isPublic && authToken) {
@@ -35,16 +35,30 @@ export default function RootLayoutClient({
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-
+    const page = searchParams.get('page') || '1';
     if (!authToken && !isPublic) {
-      router.replace('/login');
+      const newUrl = shouldPreservePageParam
+        ? `${pathname}?page=${page}`
+        : pathname;
+      router.replace(newUrl);
     } else if (authToken && isPublic) {
       const redirectTo = lastVisitedPage || '/';
-      router.replace(redirectTo);
+      const newUrl = shouldPreservePageParam
+        ? `${redirectTo}?page=${page}`
+        : redirectTo;
+      router.replace(newUrl);
     } else {
       setIsAuthChecked(true);
     }
-  }, [pathname, authToken, isPublic, router, lastVisitedPage]);
+  }, [
+    pathname,
+    authToken,
+    isPublic,
+    router,
+    lastVisitedPage,
+    searchParams,
+    shouldPreservePageParam,
+  ]);
 
   if (!isAuthChecked && !isPublic) return null;
 

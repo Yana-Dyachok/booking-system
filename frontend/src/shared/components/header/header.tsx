@@ -52,7 +52,7 @@ export const Header = () => {
             <li onClick={() => setIsMenuOpen(false)}>
               {role === Role.CLIENT && (
                 <LinkNav
-                  href="/appointments"
+                  href="/appointments?page=1"
                   activeClassName={styles.active}
                   className={styles.link}
                 >
@@ -63,7 +63,7 @@ export const Header = () => {
             <li onClick={() => setIsMenuOpen(false)}>
               {role === Role.CLIENT && (
                 <LinkNav
-                  href="/business"
+                  href="/business?page=1"
                   activeClassName={styles.active}
                   className={styles.link}
                 >

@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ClientAppointmentsProps } from '@/shared/types';
 import { DeleteAppointmentButton } from '../delete-appointment-button/delete-appointment-button.component';
 import { EditSVG } from '@/shared/assets/svg/edit.svg';
 import { formatDate, formatTime } from '@/utils';
-import Link from 'next/link';
 import styles from '../business/business.module.scss';
 
 export const ClientAppointmentsItem: React.FC<ClientAppointmentsProps> = ({
@@ -13,10 +13,17 @@ export const ClientAppointmentsItem: React.FC<ClientAppointmentsProps> = ({
   setData,
   page,
 }) => {
-  const appointmentDate = data.date ? new Date(data.date) : null;
-  const now = new Date();
-  const isPast = appointmentDate && appointmentDate < now;
-  const dateClassName = isPast ? styles.pastDate : '';
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentPage: string = searchParams.get('page') || '1';
+  const appointmentDate: Date | null = data.date ? new Date(data.date) : null;
+  const now: Date | null = new Date();
+  const isPast: boolean | null = appointmentDate && appointmentDate < now;
+  const dateClassName: string = isPast ? styles.pastDate : '';
+
+  const onClickEditButton = (): void => {
+    router.push(`/appointments/${data.id}?page=${currentPage}`);
+  };
 
   return (
     <div className={styles.blockItem}>
@@ -44,9 +51,13 @@ export const ClientAppointmentsItem: React.FC<ClientAppointmentsProps> = ({
       </ul>
 
       <div className={styles.buttons}>
-        <Link href={`/appointments/${data.id}`} className={styles.edit}>
+        <button
+          type="button"
+          onClick={onClickEditButton}
+          className={styles.edit}
+        >
           <EditSVG />
-        </Link>
+        </button>
         <DeleteAppointmentButton id={data.id} setData={setData} page={page} />
       </div>
     </div>

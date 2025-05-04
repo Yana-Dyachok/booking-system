@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Pagination from '@mui/material/Pagination';
 import { Loader } from '@/shared/ui/loader';
 import { Title } from '@/shared/ui/title';
@@ -12,11 +13,17 @@ import { Wrapper } from '@/shared/ui/wrapper';
 import styles from '../business/business.module.scss';
 
 export const ClientAppointments: React.FC = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const pageFromQuery: number = Number(searchParams.get('page')) || 1;
+
   const { data, isLoading, page, setPage, setData } = usePaginatedFetch<
     IAppointmentResponse,
     IAllAppointmentResponse
   >({
     fetchFunction: getClientAppointmentsApi,
+    initialPage: pageFromQuery,
   });
 
   const dataUsers: IAppointmentResponse[] = data?.items || [];
@@ -27,6 +34,9 @@ export const ClientAppointments: React.FC = () => {
     value: number,
   ): void => {
     setPage(value);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('page', value.toString());
+    router.replace(`?${params.toString()}`);
   };
 
   return (

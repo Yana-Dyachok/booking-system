@@ -8,15 +8,17 @@ interface UsePaginatedFetchProps<T> {
     limit: number;
   }) => Promise<{ items: T[]; total: number }>;
   limit?: number;
+  initialPage?: number;
 }
 
 export function usePaginatedFetch<T, N extends { items: T[]; total: number }>({
   fetchFunction,
   limit = 5,
+  initialPage = 1,
 }: UsePaginatedFetchProps<T>) {
   const [data, setData] = useState<N | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(initialPage);
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
